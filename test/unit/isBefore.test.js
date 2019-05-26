@@ -53,9 +53,12 @@ describe('`[IS_BEFORE]()`', () => {
 		each(comparisons).it('%s route returns %s', (type2, expected) => {
 			const pathPart1 = PATH_PARTS[type1],
 				pathPart2 = PATH_PARTS[type2];
-			const route = new RoutePath({[PATH_PART]: pathPart1}),
+			const route1 = new RoutePath({[PATH_PART]: pathPart1}),
 				route2 = new RoutePath({[PATH_PART]: pathPart2});
-			const ret = route[IS_BEFORE](route2);
+			route1.isInitialized = true;
+			route2.isInitialized = true;
+
+			const ret = route1[IS_BEFORE](route2);
 			expect(ret).toBe(expected);
 		});
 	});

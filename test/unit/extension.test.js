@@ -12,7 +12,7 @@ const {Route} = require('@overlook/core'),
 	routerMatch = require('@overlook/router-match'),
 	routerOrdered = require('@overlook/router-ordered'),
 	routerPath = require('../../index'),
-	{identifier} = routerPath;
+	{IDENTIFIER} = routerPath;
 
 // Init
 require('../support');
@@ -54,36 +54,36 @@ describe('Extension', () => { // eslint-disable-line jest/lowercase-name
 		});
 
 		it('has identifier symbol', () => {
-			expect(RoutePath[identifier]).toBeTrue();
+			expect(RoutePath[IDENTIFIER]).toBeTrue();
 		});
 
 		it('class instance has identifier symbol', () => {
 			const route = new RoutePath();
-			expect(route[identifier]).toBeTrue();
+			expect(route[IDENTIFIER]).toBeTrue();
 		});
 
 		it('has router-match identifier symbol', () => {
-			expect(RoutePath[routerMatch.identifier]).toBeTrue();
+			expect(RoutePath[routerMatch.IDENTIFIER]).toBeTrue();
 		});
 
 		it('class instance has router-match identifier symbol', () => {
 			const route = new RoutePath();
-			expect(route[routerMatch.identifier]).toBeTrue();
+			expect(route[routerMatch.IDENTIFIER]).toBeTrue();
 		});
 
 		it('has router-ordered identifier symbol', () => {
-			expect(RoutePath[routerOrdered.identifier]).toBeTrue();
+			expect(RoutePath[routerOrdered.IDENTIFIER]).toBeTrue();
 		});
 
 		it('class instance has router-ordered identifier symbol', () => {
 			const route = new RoutePath();
-			expect(route[routerOrdered.identifier]).toBeTrue();
+			expect(route[routerOrdered.IDENTIFIER]).toBeTrue();
 		});
 	});
 
 	describe('exports symbols', () => {
 		each([
-			['identifier'],
+			['IDENTIFIER'],
 			['PATH_PART'],
 			['PATH_UNCONSUMED'],
 			['PARAMS']

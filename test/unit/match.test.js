@@ -24,34 +24,58 @@ beforeEach(() => {
 });
 
 describe('[MATCH]', () => {
-	describe('at root of path', () => {
-		describe('root route', () => {
+	describe('at base of path', () => {
+		it('when no match, returns null', () => {
+			route[PATH_PART] = 'abc';
+			const ret = route[MATCH]({path: '/def'});
+			expect(ret).toBeNull();
+		});
+
+		describe('when root exact match, returns', () => {
+			let ret;
 			beforeEach(() => {
-				route[PATH_PART] = '/';
+				route[PATH_PART] = '';
+				ret = route[MATCH]({path: '/'});
 			});
 
-			describe('when exact match, returns', () => {
-				let ret;
-				beforeEach(() => {
-					ret = route[MATCH]({path: '/'});
-				});
-
-				it('object', () => {
-					expect(ret).toBeObject();
-				});
-
-				it('.exact=true', () => {
-					expect(ret.exact).toBeTrue();
-				});
-
-				it('.pathConsumed=/', () => {
-					expect(ret.pathConsumed).toBe('/');
-				});
+			it('object', () => {
+				expect(ret).toBeObject();
 			});
 
-			describe('when part match, returns', () => {
+			it('.exact=true', () => {
+				expect(ret.exact).toBeTrue();
+			});
+
+			it(".pathConsumed=''", () => {
+				expect(ret.pathConsumed).toBe('');
+			});
+		});
+
+		describe('when root part match, returns', () => {
+			let ret;
+			beforeEach(() => {
+				route[PATH_PART] = '';
+				ret = route[MATCH]({path: '/abc'});
+			});
+
+			it('object', () => {
+				expect(ret).toBeObject();
+			});
+
+			it('.exact=false', () => {
+				expect(ret.exact).toBeFalse();
+			});
+
+			it(".pathConsumed=''", () => {
+				expect(ret.pathConsumed).toBe('');
+			});
+		});
+
+		describe('when named exact match', () => {
+			describe('no trailing slash, returns', () => {
 				let ret;
 				beforeEach(() => {
+					route[PATH_PART] = 'abc';
 					ret = route[MATCH]({path: '/abc'});
 				});
 
@@ -59,25 +83,20 @@ describe('[MATCH]', () => {
 					expect(ret).toBeObject();
 				});
 
-				it('.exact=false', () => {
-					expect(ret.exact).toBeFalse();
+				it('.exact=true', () => {
+					expect(ret.exact).toBeTrue();
 				});
 
-				it('.pathConsumed=/', () => {
-					expect(ret.pathConsumed).toBe('/');
+				it('.pathConsumed=/<path part>', () => {
+					expect(ret.pathConsumed).toBe('/abc');
 				});
 			});
-		});
 
-		describe('wildcard route', () => {
-			beforeEach(() => {
-				route[PATH_PART] = '*';
-			});
-
-			describe('root path, returns', () => {
+			describe('trailing slash, returns', () => {
 				let ret;
 				beforeEach(() => {
-					ret = route[MATCH]({path: '/'});
+					route[PATH_PART] = 'abc';
+					ret = route[MATCH]({path: '/abc/'});
 				});
 
 				it('object', () => {
@@ -88,18 +107,111 @@ describe('[MATCH]', () => {
 					expect(ret.exact).toBeTrue();
 				});
 
-				it(".pathConsumed='/'", () => {
-					expect(ret.pathConsumed).toBe('/');
+				it('.pathConsumed=/<path part>', () => {
+					expect(ret.pathConsumed).toBe('/abc');
+				});
+			});
+		});
+
+		describe('when named part match, returns', () => {
+			let ret;
+			beforeEach(() => {
+				route[PATH_PART] = 'abc';
+				ret = route[MATCH]({path: '/abc/def'});
+			});
+
+			it('object', () => {
+				expect(ret).toBeObject();
+			});
+
+			it('.exact=false', () => {
+				expect(ret.exact).toBeFalse();
+			});
+
+			it('.pathConsumed=/<path part>', () => {
+				expect(ret.pathConsumed).toBe('/abc');
+			});
+		});
+
+		describe('when param exact match', () => {
+			describe('no trailing slash, returns', () => {
+				let ret;
+				beforeEach(() => {
+					route[PATH_PART] = ':id';
+					ret = route[MATCH]({path: '/abc'});
 				});
 
-				it(".params={'*': '/'}", () => {
-					expect(ret.params).toEqual({'*': '/'});
+				it('object', () => {
+					expect(ret).toBeObject();
+				});
+
+				it('.exact=true', () => {
+					expect(ret.exact).toBeTrue();
+				});
+
+				it('.pathConsumed=/<path part>', () => {
+					expect(ret.pathConsumed).toBe('/abc');
+				});
+
+				it('.params={<param name>: <path part>}', () => {
+					expect(ret.params).toEqual({id: 'abc'});
 				});
 			});
 
-			describe('longer path, returns', () => {
+			describe('trailing slash, returns', () => {
 				let ret;
 				beforeEach(() => {
+					route[PATH_PART] = ':id';
+					ret = route[MATCH]({path: '/abc/'});
+				});
+
+				it('object', () => {
+					expect(ret).toBeObject();
+				});
+
+				it('.exact=true', () => {
+					expect(ret.exact).toBeTrue();
+				});
+
+				it('.pathConsumed=/<path part>', () => {
+					expect(ret.pathConsumed).toBe('/abc');
+				});
+
+				it('.params={<param name>: <path part>}', () => {
+					expect(ret.params).toEqual({id: 'abc'});
+				});
+			});
+		});
+
+		describe('when param part match, returns', () => {
+			let ret;
+			beforeEach(() => {
+				route[PATH_PART] = ':id';
+				ret = route[MATCH]({path: '/abc/def'});
+			});
+
+			it('object', () => {
+				expect(ret).toBeObject();
+			});
+
+			it('.exact=false', () => {
+				expect(ret.exact).toBeFalse();
+			});
+
+			it('.pathConsumed=/<path part>', () => {
+				expect(ret.pathConsumed).toBe('/abc');
+			});
+
+			it('.params={<param name>: <path part>}', () => {
+				expect(ret.params).toEqual({id: 'abc'});
+			});
+		});
+
+		describe('when wildcard match', () => {
+			describe('when 1 part remaining, returns', () => {
+				let ret;
+				beforeEach(() => {
+					route[PATH_PART] = '*';
 					ret = route[MATCH]({path: '/abc'});
 				});
 
@@ -115,209 +227,7 @@ describe('[MATCH]', () => {
 					expect(ret.pathConsumed).toBe('/abc');
 				});
 
-				it(".params={'*': <path>}", () => {
-					expect(ret.params).toEqual({'*': '/abc'});
-				});
-			});
-		});
-
-		describe('named route', () => {
-			beforeEach(() => {
-				route[PATH_PART] = 'abc';
-			});
-
-			it('when root path, returns null', () => {
-				const ret = route[MATCH]({path: '/'});
-				expect(ret).toBeNull();
-			});
-
-			it('when longer path, returns null', () => {
-				const ret = route[MATCH]({path: '/abc'});
-				expect(ret).toBeNull();
-			});
-		});
-
-		describe('param route', () => {
-			beforeEach(() => {
-				route[PATH_PART] = ':id';
-			});
-
-			it('when root path, returns null', () => {
-				const ret = route[MATCH]({path: '/'});
-				expect(ret).toBeNull();
-			});
-
-			it('when longer path, returns null', () => {
-				const ret = route[MATCH]({path: '/abc'});
-				expect(ret).toBeNull();
-			});
-		});
-	});
-
-	describe('at base of path', () => {
-		it('when no match, returns null', () => {
-			route[PATH_PART] = 'abc';
-			const ret = route[MATCH]({path: 'def'});
-			expect(ret).toBeNull();
-		});
-
-		describe('when named exact match', () => {
-			describe('no trailing slash, returns', () => {
-				let ret;
-				beforeEach(() => {
-					route[PATH_PART] = 'abc';
-					ret = route[MATCH]({path: 'abc'});
-				});
-
-				it('object', () => {
-					expect(ret).toBeObject();
-				});
-
-				it('.exact=true', () => {
-					expect(ret.exact).toBeTrue();
-				});
-
-				it('.pathConsumed=<path part>', () => {
-					expect(ret.pathConsumed).toBe('abc');
-				});
-			});
-
-			describe('trailing slash, returns', () => {
-				let ret;
-				beforeEach(() => {
-					route[PATH_PART] = 'abc';
-					ret = route[MATCH]({path: 'abc/'});
-				});
-
-				it('object', () => {
-					expect(ret).toBeObject();
-				});
-
-				it('.exact=true', () => {
-					expect(ret.exact).toBeTrue();
-				});
-
-				it('.pathConsumed=<path part>/', () => {
-					expect(ret.pathConsumed).toBe('abc/');
-				});
-			});
-		});
-
-		describe('when named part match, returns', () => {
-			let ret;
-			beforeEach(() => {
-				route[PATH_PART] = 'abc';
-				ret = route[MATCH]({path: 'abc/def'});
-			});
-
-			it('object', () => {
-				expect(ret).toBeObject();
-			});
-
-			it('.exact=false', () => {
-				expect(ret.exact).toBeFalse();
-			});
-
-			it('.pathConsumed=<path part>/', () => {
-				expect(ret.pathConsumed).toBe('abc/');
-			});
-		});
-
-		describe('when param exact match', () => {
-			describe('no trailing slash, returns', () => {
-				let ret;
-				beforeEach(() => {
-					route[PATH_PART] = ':id';
-					ret = route[MATCH]({path: 'abc'});
-				});
-
-				it('object', () => {
-					expect(ret).toBeObject();
-				});
-
-				it('.exact=true', () => {
-					expect(ret.exact).toBeTrue();
-				});
-
-				it('.pathConsumed=<path part>', () => {
-					expect(ret.pathConsumed).toBe('abc');
-				});
-
-				it('.params={<param name>: <path part>}', () => {
-					expect(ret.params).toEqual({id: 'abc'});
-				});
-			});
-
-			describe('trailing slash, returns', () => {
-				let ret;
-				beforeEach(() => {
-					route[PATH_PART] = ':id';
-					ret = route[MATCH]({path: 'abc/'});
-				});
-
-				it('object', () => {
-					expect(ret).toBeObject();
-				});
-
-				it('.exact=true', () => {
-					expect(ret.exact).toBeTrue();
-				});
-
-				it('.pathConsumed=<path part>/', () => {
-					expect(ret.pathConsumed).toBe('abc/');
-				});
-
-				it('.params={<param name>: <path part>}', () => {
-					expect(ret.params).toEqual({id: 'abc'});
-				});
-			});
-		});
-
-		describe('when param part match, returns', () => {
-			let ret;
-			beforeEach(() => {
-				route[PATH_PART] = ':id';
-				ret = route[MATCH]({path: 'abc/def'});
-			});
-
-			it('object', () => {
-				expect(ret).toBeObject();
-			});
-
-			it('.exact=false', () => {
-				expect(ret.exact).toBeFalse();
-			});
-
-			it('.pathConsumed=<path part>/', () => {
-				expect(ret.pathConsumed).toBe('abc/');
-			});
-
-			it('.params={<param name>: <path part>}', () => {
-				expect(ret.params).toEqual({id: 'abc'});
-			});
-		});
-
-		describe('when wildcard match', () => {
-			describe('when 1 part remaining, returns', () => {
-				let ret;
-				beforeEach(() => {
-					route[PATH_PART] = '*';
-					ret = route[MATCH]({path: 'abc'});
-				});
-
-				it('object', () => {
-					expect(ret).toBeObject();
-				});
-
-				it('.exact=true', () => {
-					expect(ret.exact).toBeTrue();
-				});
-
-				it('.pathConsumed=<path>', () => {
-					expect(ret.pathConsumed).toBe('abc');
-				});
-
-				it(".params={'*': <path>}", () => {
+				it(".params={'*': <path minus start slash>}", () => {
 					expect(ret.params).toEqual({'*': 'abc'});
 				});
 			});
@@ -326,7 +236,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = '*';
-					ret = route[MATCH]({path: 'a/b/c'});
+					ret = route[MATCH]({path: '/a/b/c'});
 				});
 
 				it('object', () => {
@@ -338,10 +248,10 @@ describe('[MATCH]', () => {
 				});
 
 				it('.pathConsumed=<path>', () => {
-					expect(ret.pathConsumed).toBe('a/b/c');
+					expect(ret.pathConsumed).toBe('/a/b/c');
 				});
 
-				it(".params={'*': <path>}", () => {
+				it(".params={'*': <path minus start slash>}", () => {
 					expect(ret.params).toEqual({'*': 'a/b/c'});
 				});
 			});
@@ -353,7 +263,7 @@ describe('[MATCH]', () => {
 			// Consume with first path part consumed
 			return {
 				path,
-				[PATH_UNCONSUMED]: path.slice(path.indexOf('/', 1) + 1)
+				[PATH_UNCONSUMED]: path.slice(path.indexOf('/', 1))
 			};
 		}
 
@@ -381,8 +291,8 @@ describe('[MATCH]', () => {
 					expect(ret.exact).toBeTrue();
 				});
 
-				it('.pathConsumed=<path part>', () => {
-					expect(ret.pathConsumed).toBe('def');
+				it('.pathConsumed=/<path part>', () => {
+					expect(ret.pathConsumed).toBe('/def');
 				});
 			});
 
@@ -402,8 +312,8 @@ describe('[MATCH]', () => {
 					expect(ret.exact).toBeTrue();
 				});
 
-				it('.pathConsumed=<path part>/', () => {
-					expect(ret.pathConsumed).toBe('def/');
+				it('.pathConsumed=/<path part>', () => {
+					expect(ret.pathConsumed).toBe('/def');
 				});
 			});
 		});
@@ -424,8 +334,8 @@ describe('[MATCH]', () => {
 				expect(ret.exact).toBeFalse();
 			});
 
-			it('.pathConsumed=<path part>/', () => {
-				expect(ret.pathConsumed).toBe('def/');
+			it('.pathConsumed=/<path part>', () => {
+				expect(ret.pathConsumed).toBe('/def');
 			});
 		});
 
@@ -446,8 +356,8 @@ describe('[MATCH]', () => {
 					expect(ret.exact).toBeTrue();
 				});
 
-				it('.pathConsumed=<path part>', () => {
-					expect(ret.pathConsumed).toBe('def');
+				it('.pathConsumed=/<path part>', () => {
+					expect(ret.pathConsumed).toBe('/def');
 				});
 
 				it('.params={<param name>: <path part>}', () => {
@@ -471,8 +381,8 @@ describe('[MATCH]', () => {
 					expect(ret.exact).toBeTrue();
 				});
 
-				it('.pathConsumed=<path part>/', () => {
-					expect(ret.pathConsumed).toBe('def/');
+				it('.pathConsumed=/<path part>', () => {
+					expect(ret.pathConsumed).toBe('/def');
 				});
 
 				it('.params={<param name>: <path part>}', () => {
@@ -497,8 +407,8 @@ describe('[MATCH]', () => {
 				expect(ret.exact).toBeFalse();
 			});
 
-			it('.pathConsumed=<path part>/', () => {
-				expect(ret.pathConsumed).toBe('def/');
+			it('.pathConsumed=/<path part>', () => {
+				expect(ret.pathConsumed).toBe('/def');
 			});
 
 			it('.params={<param name>: <path part>}', () => {
@@ -524,7 +434,7 @@ describe('[MATCH]', () => {
 				});
 
 				it('.pathConsumed=<path>', () => {
-					expect(ret.pathConsumed).toBe('def');
+					expect(ret.pathConsumed).toBe('/def');
 				});
 
 				it(".params={'*': <path>}", () => {
@@ -549,7 +459,7 @@ describe('[MATCH]', () => {
 				});
 
 				it('.pathConsumed=<path>', () => {
-					expect(ret.pathConsumed).toBe('b/c/d');
+					expect(ret.pathConsumed).toBe('/b/c/d');
 				});
 
 				it(".params={'*': <path>}", () => {

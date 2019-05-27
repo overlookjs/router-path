@@ -114,7 +114,7 @@ function notHandledByOthersThan(handledByRoute) {
 
 describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 	describe('root path', () => {
-		describe("when root route has [PATH_PART] = '/'", () => {
+		describe("when root route has [PATH_PART] = ''", () => {
 			let req;
 			beforeEach(() => {
 				req = {path: '/'};
@@ -138,7 +138,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			});
 
 			afterEach(() => {
-				router[PATH_PART] = '/';
+				router[PATH_PART] = '';
 			});
 
 			it('handled by wildcard route', () => {
@@ -147,7 +147,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			});
 
 			it('param populated in req[PARAMS]', () => {
-				expect(req[PARAMS]).toEqual({'*': '/'});
+				expect(req[PARAMS]).toEqual({'*': ''});
 			});
 
 			notHandledByOthersThan(router);

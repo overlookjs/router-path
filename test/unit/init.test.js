@@ -25,20 +25,20 @@ describe('.initRoute', () => {
 		route = new RoutePath();
 	});
 
-	it("[PATH_PART] defaults to '/' if is root route", () => {
+	it("[PATH_PART] defaults to '' if is root route", () => {
 		const app = new Overlook();
 		app.attachRouter(route);
 		route.initRoute();
-		expect(route[PATH_PART]).toBe('/');
+		expect(route[PATH_PART]).toBe('');
 	});
 
-	it("[PATH_PART] defaults to '/' if no path route above", () => {
+	it("[PATH_PART] defaults to '' if no path route above", () => {
 		const app = new Overlook();
 		const parent = new Route();
 		app.attachRouter(parent);
 		parent.attachChild(route);
 		route.initRoute();
-		expect(route[PATH_PART]).toBe('/');
+		expect(route[PATH_PART]).toBe('');
 	});
 
 	it('inherits [PATH_PART] from .name', () => {
@@ -69,12 +69,5 @@ describe('.initRoute', () => {
 		expect(() => {
 			route.initRoute();
 		}).toThrowWithMessage(Error, '[routerPath.PATH_PART] must be a string');
-	});
-
-	it('throws error if [PATH_PART] is empty string', () => {
-		route[PATH_PART] = '';
-		expect(() => {
-			route.initRoute();
-		}).toThrowWithMessage(Error, '[routerPath.PATH_PART] cannot be empty string');
 	});
 });

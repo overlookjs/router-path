@@ -54,20 +54,26 @@ describe('.initRoute', () => {
 		parent.attachChild(route);
 		expect(() => {
 			route.initRoute();
-		}).toThrowWithMessage(Error, '[routerPath.PATH_PART] must be set on a path route');
+		}).toThrowWithMessage(
+			Error, '[routerPath.PATH_PART] must be set on a path route (in router path /?)'
+		);
 	});
 
 	it('throws error if [PATH_PART] is null', () => {
 		route[PATH_PART] = null;
 		expect(() => {
 			route.initRoute();
-		}).toThrowWithMessage(Error, '[routerPath.PATH_PART] must be set on a path route');
+		}).toThrowWithMessage(
+			Error, '[routerPath.PATH_PART] must be set on a path route (in router path /)'
+		);
 	});
 
 	it('throws error if [PATH_PART] is not a string', () => {
 		route[PATH_PART] = 123;
 		expect(() => {
 			route.initRoute();
-		}).toThrowWithMessage(Error, '[routerPath.PATH_PART] must be a string');
+		}).toThrowWithMessage(
+			Error, '[routerPath.PATH_PART] must be a string (in router path /)'
+		);
 	});
 });

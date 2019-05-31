@@ -1,6 +1,6 @@
 {
   "name": "@overlook/router-path",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Overlook framework path router",
   "main": "index.js",
   "author": {

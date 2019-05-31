@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1
+
+Dependencies:
+
+* Update `@overlook/router-ordered` dependency
+
 ## 0.4.0
 
 Breaking changes:

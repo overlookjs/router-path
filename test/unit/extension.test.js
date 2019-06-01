@@ -8,7 +8,6 @@
 
 // Modules
 const {Route} = require('@overlook/core'),
-	each = require('jest-each').default,
 	routerMatch = require('@overlook/router-match'),
 	routerOrdered = require('@overlook/router-ordered'),
 	routerPath = require('../../index'),
@@ -82,26 +81,26 @@ describe('Extension', () => { // eslint-disable-line jest/lowercase-name
 	});
 
 	describe('exports symbols', () => {
-		each([
+		it.each([
 			['IDENTIFIER'],
 			['PATH_PART'],
 			['PATH_UNCONSUMED'],
 			['PARAMS']
-		]).it('%s', (key) => {
+		])('%s', (key) => {
 			expect(typeof routerPath[key]).toBe('symbol');
 		});
 	});
 
 	describe('exports symbols from router-match', () => {
 		const symbolKeys = Object.getOwnPropertySymbols(routerMatch);
-		each(symbolKeys.map(key => [key])).it('%s', (key) => {
+		it.each(symbolKeys.map(key => [key]))('%s', (key) => {
 			expect(typeof routerPath[key]).toBe('symbol');
 		});
 	});
 
 	describe('exports symbols from router-ordered', () => {
 		const symbolKeys = Object.getOwnPropertySymbols(routerOrdered);
-		each(symbolKeys.map(key => [key])).it('%s', (key) => {
+		it.each(symbolKeys.map(key => [key]))('%s', (key) => {
 			expect(typeof routerPath[key]).toBe('symbol');
 		});
 	});

@@ -9,7 +9,6 @@
 // Modules
 const Overlook = require('@overlook/core'),
 	{Route} = Overlook,
-	each = require('jest-each').default,
 	routerPath = require('../../index'),
 	{PATH_PART} = routerPath;
 
@@ -48,7 +47,7 @@ describe('Ordering', () => { // eslint-disable-line jest/lowercase-name
 			!!reorders
 		]);
 
-		each(cases).it('%s route %s %s route', (_1, _2, _3, pathPart1, pathPart2, reorders) => {
+		it.each(cases)('%s route %s %s route', (_1, _2, _3, pathPart1, pathPart2, reorders) => {
 			const router = new Route(),
 				route1 = new RoutePath({[PATH_PART]: pathPart1}),
 				route2 = new RoutePath({[PATH_PART]: pathPart2});

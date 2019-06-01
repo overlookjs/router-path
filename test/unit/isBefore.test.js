@@ -8,7 +8,6 @@
 
 // Modules
 const {Route} = require('@overlook/core'),
-	each = require('jest-each').default,
 	routerPath = require('../../index'),
 	{PATH_PART, IS_BEFORE} = routerPath;
 
@@ -33,7 +32,7 @@ describe('`[IS_BEFORE]()`', () => {
 		wildcard: '*'
 	};
 
-	each([
+	describe.each([
 		['named', [
 			['named', null],
 			['param', true],
@@ -49,8 +48,8 @@ describe('`[IS_BEFORE]()`', () => {
 			['param', false],
 			['wildcard', null]
 		]]
-	]).describe('comparing %s route to', (type1, comparisons) => {
-		each(comparisons).it('%s route returns %s', (type2, expected) => {
+	])('comparing %s route to', (type1, comparisons) => {
+		it.each(comparisons)('%s route returns %s', (type2, expected) => {
 			const pathPart1 = PATH_PARTS[type1],
 				pathPart2 = PATH_PARTS[type2];
 			const route1 = new RoutePath({[PATH_PART]: pathPart1}),

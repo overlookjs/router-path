@@ -8,7 +8,6 @@
 
 // Modules
 const {Route} = require('@overlook/core'),
-	each = require('jest-each').default,
 	routerPath = require('../../index'),
 	{HANDLE_MATCH, HANDLE_ROUTE, HANDLE_CHILDREN, PATH_UNCONSUMED, PARAMS} = routerPath;
 
@@ -20,10 +19,10 @@ require('../support');
 const RoutePath = Route.extend(routerPath);
 
 describe('[HANDLE_MATCH]', () => {
-	each([
+	describe.each([
 		['exact', true, 'HANDLE_ROUTE', HANDLE_ROUTE],
 		['non-exact', false, 'HANDLE_CHILDREN', HANDLE_CHILDREN]
-	]).describe('%s match', (testName, exact, methodName, methodKey) => {
+	])('%s match', (testName, exact, methodName, methodKey) => {
 		describe(`[${methodName}] returns non-null`, () => {
 			let route, handlerPathUnconsumed, handlerParams;
 			beforeEach(() => {

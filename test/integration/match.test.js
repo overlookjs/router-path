@@ -9,7 +9,6 @@
 // Modules
 const Overlook = require('@overlook/core'),
 	{Route} = Overlook,
-	each = require('jest-each').default,
 	routerPath = require('../../index'),
 	{PATH_PART, PARAMS, HANDLE_ROUTE} = routerPath;
 
@@ -81,7 +80,7 @@ beforeEach(() => {
 
 function notHandledByOthersThan(handledByRoute) {
 	describe('not handled by', () => {
-		each([
+		describe.each([
 			['root level', [
 				['root', router]
 			]],
@@ -102,10 +101,10 @@ function notHandledByOthersThan(handledByRoute) {
 				['param child of param child', routePP],
 				['wildcard of param child', routePW]
 			]]
-		]).describe('%s routes', (name, options) => {
-			each(
+		])('%s routes', (name, options) => {
+			it.each(
 				options.filter(option => option[1] !== handledByRoute)
-			).it('%s route', (name2, route) => {
+			)('%s route', (name2, route) => {
 				expect(route[HANDLE_ROUTE]).not.toHaveBeenCalled();
 			});
 		});

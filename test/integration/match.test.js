@@ -9,7 +9,7 @@
 // Modules
 const Overlook = require('@overlook/core'),
 	{Route} = Overlook,
-	routerPath = require('../../index.js'),
+	routerPath = require('@overlook/router-path'),
 	{PATH_PART, PARAMS, HANDLE_ROUTE} = routerPath;
 
 // Init

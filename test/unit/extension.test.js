@@ -10,7 +10,7 @@
 const {Route} = require('@overlook/core'),
 	routerMatch = require('@overlook/router-match'),
 	routerOrdered = require('@overlook/router-ordered'),
-	routerPath = require('../../index.js'),
+	routerPath = require('@overlook/router-path'),
 	{IDENTIFIER} = routerPath;
 
 // Init

@@ -1,4 +1,11 @@
+/* --------------------
+ * @overlook/router-path module
+ * Jest config
+ * ------------------*/
+
 'use strict';
+
+// Exports
 
 module.exports = {
 	testEnvironment: 'node',

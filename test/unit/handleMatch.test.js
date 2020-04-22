@@ -8,11 +8,11 @@
 
 // Modules
 const {Route} = require('@overlook/core'),
-	routerPath = require('../../index'),
+	routerPath = require('../../index.js'),
 	{HANDLE_MATCH, HANDLE_ROUTE, HANDLE_CHILDREN, PATH_UNCONSUMED, PARAMS} = routerPath;
 
 // Init
-require('../support');
+require('../support/index.js');
 
 // Tests
 

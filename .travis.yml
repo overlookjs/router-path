@@ -20,5 +20,3 @@ matrix:
     - env: COVERAGE=true
 
 cache: npm
-
-sudo: false

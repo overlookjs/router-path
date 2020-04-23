@@ -1,5 +1,5 @@
 /* --------------------
- * @overlook/router-path module
+ * @overlook/plugin-path module
  * Tests
  * Ordering integration tests
  * ------------------*/
@@ -9,15 +9,15 @@
 // Modules
 const Overlook = require('@overlook/core'),
 	Route = require('@overlook/route'),
-	routerPath = require('@overlook/router-path'),
-	{PATH_PART} = routerPath;
+	pathPlugin = require('@overlook/plugin-path'),
+	{PATH_PART} = pathPlugin;
 
 // Init
 require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(routerPath);
+const RoutePath = Route.extend(pathPlugin);
 
 describe('Ordering', () => { // eslint-disable-line jest/lowercase-name
 	describe('routes are ordered with', () => {

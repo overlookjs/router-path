@@ -1,5 +1,5 @@
 /* --------------------
- * @overlook/router-path module
+ * @overlook/plugin-path module
  * Tests
  * [INIT_ROUTE] method
  * ------------------*/
@@ -10,15 +10,15 @@
 const Overlook = require('@overlook/core'),
 	Route = require('@overlook/route'),
 	{INIT_ROUTE} = Route,
-	routerPath = require('@overlook/router-path'),
-	{PATH_PART} = routerPath;
+	pathPlugin = require('@overlook/plugin-path'),
+	{PATH_PART} = pathPlugin;
 
 // Init
 require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(routerPath);
+const RoutePath = Route.extend(pathPlugin);
 
 describe('[INIT_ROUTE]', () => {
 	let route;
@@ -56,7 +56,7 @@ describe('[INIT_ROUTE]', () => {
 		expect(() => {
 			route.init();
 		}).toThrowWithMessage(
-			Error, '[routerPath.PATH_PART] must be set on a path route (router path /?)'
+			Error, '[plugin-path.PATH_PART] must be set on a path route (router path /?)'
 		);
 	});
 
@@ -65,7 +65,7 @@ describe('[INIT_ROUTE]', () => {
 		expect(() => {
 			route.init();
 		}).toThrowWithMessage(
-			Error, '[routerPath.PATH_PART] must be set on a path route (router path /)'
+			Error, '[plugin-path.PATH_PART] must be set on a path route (router path /)'
 		);
 	});
 
@@ -74,7 +74,7 @@ describe('[INIT_ROUTE]', () => {
 		expect(() => {
 			route.init();
 		}).toThrowWithMessage(
-			Error, '[routerPath.PATH_PART] must be a string (router path /)'
+			Error, '[plugin-path.PATH_PART] must be a string (router path /)'
 		);
 	});
 });

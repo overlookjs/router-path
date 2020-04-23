@@ -1,5 +1,5 @@
 /* --------------------
- * @overlook/router-path module
+ * @overlook/plugin-path module
  * Tests
  * [MATCH] method
  * ------------------*/
@@ -9,15 +9,15 @@
 // Modules
 const Route = require('@overlook/route'),
 	{MATCH} = require('@overlook/plugin-match'),
-	routerPath = require('@overlook/router-path'),
-	{PATH_PART, PATH_UNCONSUMED} = routerPath;
+	pathPlugin = require('@overlook/plugin-path'),
+	{PATH_PART, PATH_UNCONSUMED} = pathPlugin;
 
 // Init
 require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(routerPath);
+const RoutePath = Route.extend(pathPlugin);
 
 let route;
 beforeEach(() => {

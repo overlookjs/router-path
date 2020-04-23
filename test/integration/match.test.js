@@ -1,5 +1,5 @@
 /* --------------------
- * @overlook/router-path module
+ * @overlook/plugin-path module
  * Tests
  * Matching integration tests
  * ------------------*/
@@ -10,8 +10,8 @@
 const Overlook = require('@overlook/core'),
 	Route = require('@overlook/route'),
 	{HANDLE_ROUTE} = require('@overlook/plugin-match'),
-	routerPath = require('@overlook/router-path'),
-	{PATH_PART, PARAMS} = routerPath;
+	pathPlugin = require('@overlook/plugin-path'),
+	{PATH_PART, PARAMS} = pathPlugin;
 
 // Init
 require('../support/index.js');
@@ -21,7 +21,7 @@ const spy = jest.fn;
 // Set-up
 
 // Define route tree
-const RoutePath = Route.extend(routerPath);
+const RoutePath = Route.extend(pathPlugin);
 
 // Root
 const router = new RoutePath({[HANDLE_ROUTE]: spy(() => true)});

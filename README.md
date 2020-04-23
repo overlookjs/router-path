@@ -1,11 +1,11 @@
-[![NPM version](https://img.shields.io/npm/v/@overlook/router-path.svg)](https://www.npmjs.com/package/@overlook/router-path)
-[![Build Status](https://img.shields.io/travis/overlookjs/router-path/master.svg)](http://travis-ci.org/overlookjs/router-path)
-[![Dependency Status](https://img.shields.io/david/overlookjs/router-path.svg)](https://david-dm.org/overlookjs/router-path)
-[![Dev dependency Status](https://img.shields.io/david/dev/overlookjs/router-path.svg)](https://david-dm.org/overlookjs/router-path)
-[![Greenkeeper badge](https://badges.greenkeeper.io/overlookjs/router-path.svg)](https://greenkeeper.io/)
-[![Coverage Status](https://img.shields.io/coveralls/overlookjs/router-path/master.svg)](https://coveralls.io/r/overlookjs/router-path)
+[![NPM version](https://img.shields.io/npm/v/@overlook/plugin-path.svg)](https://www.npmjs.com/package/@overlook/plugin-path)
+[![Build Status](https://img.shields.io/travis/overlookjs/plugin-path/master.svg)](http://travis-ci.org/overlookjs/plugin-path)
+[![Dependency Status](https://img.shields.io/david/overlookjs/plugin-path.svg)](https://david-dm.org/overlookjs/plugin-path)
+[![Dev dependency Status](https://img.shields.io/david/dev/overlookjs/plugin-path.svg)](https://david-dm.org/overlookjs/plugin-path)
+[![Greenkeeper badge](https://badges.greenkeeper.io/overlookjs/plugin-path.svg)](https://greenkeeper.io/)
+[![Coverage Status](https://img.shields.io/coveralls/overlookjs/plugin-path/master.svg)](https://coveralls.io/r/overlookjs/plugin-path)
 
-# Overlook framework path router
+# Overlook framework path plugin
 
 Part of the [Overlook framework](https://overlookjs.github.io/).
 
@@ -25,11 +25,11 @@ Use `npm test` to run the tests. Use `npm run cover` to check coverage.
 
 ## Changelog
 
-See [changelog.md](https://github.com/overlookjs/router-path/blob/master/changelog.md)
+See [changelog.md](https://github.com/overlookjs/plugin-path/blob/master/changelog.md)
 
 ## Issues
 
-If you discover a bug, please raise an issue on Github. https://github.com/overlookjs/router-path/issues
+If you discover a bug, please raise an issue on Github. https://github.com/overlookjs/plugin-path/issues
 
 ## Contribution
 

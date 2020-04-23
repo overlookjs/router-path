@@ -1,5 +1,5 @@
 /* --------------------
- * @overlook/router-path module
+ * @overlook/plugin-path module
  * Tests
  * Route constructor
  * ------------------*/
@@ -8,15 +8,15 @@
 
 // Modules
 const Route = require('@overlook/route'),
-	routerPath = require('@overlook/router-path'),
-	{PATH_PART} = routerPath;
+	pathPlugin = require('@overlook/plugin-path'),
+	{PATH_PART} = pathPlugin;
 
 // Init
 require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(routerPath);
+const RoutePath = Route.extend(pathPlugin);
 
 describe('RoutePath constructor', () => { // eslint-disable-line jest/lowercase-name
 	it('initializes undefined [PATH_PART] property', () => {

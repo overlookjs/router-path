@@ -1,5 +1,5 @@
 /* --------------------
- * @overlook/router-path module
+ * @overlook/plugin-path module
  * Tests
  * Extension function
  * ------------------*/
@@ -10,7 +10,7 @@
 const Route = require('@overlook/route'),
 	pluginMatch = require('@overlook/plugin-match'),
 	pluginOrdered = require('@overlook/plugin-ordered'),
-	routerPath = require('@overlook/router-path');
+	pathPlugin = require('@overlook/plugin-path');
 
 // Init
 require('../support/index.js');
@@ -19,13 +19,13 @@ require('../support/index.js');
 
 describe('Plugin', () => { // eslint-disable-line jest/lowercase-name
 	it('is an object', () => {
-		expect(routerPath).toBeObject();
+		expect(pathPlugin).toBeObject();
 	});
 
 	describe('when passed to `Route.extend()`', () => {
 		let RoutePath;
 		beforeEach(() => {
-			RoutePath = Route.extend(routerPath);
+			RoutePath = Route.extend(pathPlugin);
 		});
 
 		it('returns subclass of Route', () => {
@@ -52,7 +52,7 @@ describe('Plugin', () => { // eslint-disable-line jest/lowercase-name
 			['PATH_UNCONSUMED'],
 			['PARAMS']
 		])('%s', (key) => {
-			expect(typeof routerPath[key]).toBe('symbol');
+			expect(typeof pathPlugin[key]).toBe('symbol');
 		});
 	});
 });

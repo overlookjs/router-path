@@ -1,5 +1,5 @@
 /* --------------------
- * @overlook/router-path
+ * @overlook/plugin-path
  * Tests set-up
  * ------------------*/
 

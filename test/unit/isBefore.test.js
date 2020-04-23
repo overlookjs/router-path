@@ -1,5 +1,5 @@
 /* --------------------
- * @overlook/router-path module
+ * @overlook/plugin-path module
  * Tests
  * [IS_BEFORE] method
  * ------------------*/
@@ -10,15 +10,15 @@
 const Route = require('@overlook/route'),
 	{IS_INITIALIZED} = Route,
 	{IS_BEFORE} = require('@overlook/plugin-ordered'),
-	routerPath = require('@overlook/router-path'),
-	{PATH_PART} = routerPath;
+	pathPlugin = require('@overlook/plugin-path'),
+	{PATH_PART} = pathPlugin;
 
 // Init
 require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(routerPath);
+const RoutePath = Route.extend(pathPlugin);
 
 describe('`[IS_BEFORE]()`', () => {
 	it('comparing path route to non-path route, returns null', () => {

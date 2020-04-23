@@ -1,7 +1,7 @@
 {
-  "name": "@overlook/router-path",
+  "name": "@overlook/plugin-path",
   "version": "0.4.1",
-  "description": "Overlook framework path router",
+  "description": "Overlook framework path plugin",
   "main": "index.js",
   "files": [
     "lib/**/*.js"
@@ -11,10 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/overlookjs/router-path.git"
+    "url": "https://github.com/overlookjs/plugin-path.git"
   },
   "bugs": {
-    "url": "https://github.com/overlookjs/router-path/issues"
+    "url": "https://github.com/overlookjs/plugin-path/issues"
   },
   "dependencies": {
     "@overlook/plugin": "^0.2.3",
@@ -42,7 +42,7 @@
   },
   "keywords": [
     "overlook",
-    "overlook-router",
+    "overlook-plugin",
     "path"
   ],
   "scripts": {

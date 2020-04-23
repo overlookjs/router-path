@@ -1,5 +1,5 @@
 /* --------------------
- * @overlook/router-path module
+ * @overlook/plugin-path module
  * Jest config
  * ------------------*/
 
@@ -13,6 +13,6 @@ module.exports = {
 	collectCoverageFrom: ['index.js', 'lib/**/*.js'],
 	setupFilesAfterEnv: ['jest-extended'],
 	moduleNameMapper: {
-		'^@overlook/router-path$': '<rootDir>/index.js'
+		'^@overlook/plugin-path$': '<rootDir>/index.js'
 	}
 };

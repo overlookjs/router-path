@@ -1,5 +1,5 @@
 /* --------------------
- * @overlook/router-path module
+ * @overlook/plugin-path module
  * Tests
  * [HANDLE_MATCH] method
  * ------------------*/
@@ -9,15 +9,15 @@
 // Modules
 const Route = require('@overlook/route'),
 	{HANDLE_MATCH, HANDLE_ROUTE, HANDLE_CHILDREN} = require('@overlook/plugin-match'),
-	routerPath = require('@overlook/router-path'),
-	{PATH_UNCONSUMED, PARAMS} = routerPath;
+	pathPlugin = require('@overlook/plugin-path'),
+	{PATH_UNCONSUMED, PARAMS} = pathPlugin;
 
 // Init
 require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(routerPath);
+const RoutePath = Route.extend(pathPlugin);
 
 describe('[HANDLE_MATCH]', () => {
 	describe.each([

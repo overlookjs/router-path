@@ -7,7 +7,7 @@
 'use strict';
 
 // Modules
-const {Route} = require('@overlook/core'),
+const Route = require('@overlook/route'),
 	routerPath = require('@overlook/router-path'),
 	{PATH_PART} = routerPath;
 

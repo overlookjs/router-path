@@ -7,9 +7,11 @@
 'use strict';
 
 // Modules
-const {Route} = require('@overlook/core'),
+const Route = require('@overlook/route'),
+	{IS_INITIALIZED} = Route,
+	{IS_BEFORE} = require('@overlook/plugin-ordered'),
 	routerPath = require('@overlook/router-path'),
-	{PATH_PART, IS_BEFORE} = routerPath;
+	{PATH_PART} = routerPath;
 
 // Init
 require('../support/index.js');
@@ -54,8 +56,8 @@ describe('`[IS_BEFORE]()`', () => {
 				pathPart2 = PATH_PARTS[type2];
 			const route1 = new RoutePath({[PATH_PART]: pathPart1}),
 				route2 = new RoutePath({[PATH_PART]: pathPart2});
-			route1.isInitialized = true;
-			route2.isInitialized = true;
+			route1[IS_INITIALIZED] = true;
+			route2[IS_INITIALIZED] = true;
 
 			const ret = route1[IS_BEFORE](route2);
 			expect(ret).toBe(expected);

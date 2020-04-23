@@ -8,9 +8,10 @@
 
 // Modules
 const Overlook = require('@overlook/core'),
-	{Route} = Overlook,
+	Route = require('@overlook/route'),
+	{HANDLE_ROUTE} = require('@overlook/plugin-match'),
 	routerPath = require('@overlook/router-path'),
-	{PATH_PART, PARAMS, HANDLE_ROUTE} = routerPath;
+	{PATH_PART, PARAMS} = routerPath;
 
 // Init
 require('../support/index.js');
@@ -102,9 +103,10 @@ function notHandledByOthersThan(handledByRoute) {
 				['wildcard of param child', routePW]
 			]]
 		])('%s routes', (name, options) => {
-			it.each(
-				options.filter(option => option[1] !== handledByRoute)
-			)('%s route', (name2, route) => {
+			options = options.filter(option => option[1] !== handledByRoute);
+			if (options.length === 0) return;
+
+			it.each(options)('%s route', (name2, route) => {
 				expect(route[HANDLE_ROUTE]).not.toHaveBeenCalled();
 			});
 		});

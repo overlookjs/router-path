@@ -1,14 +1,15 @@
 /* --------------------
  * @overlook/router-path module
  * Tests
- * .initRoute method
+ * [INIT_ROUTE] method
  * ------------------*/
 
 'use strict';
 
 // Modules
 const Overlook = require('@overlook/core'),
-	{Route} = Overlook,
+	Route = require('@overlook/route'),
+	{INIT_ROUTE} = Route,
 	routerPath = require('@overlook/router-path'),
 	{PATH_PART} = routerPath;
 
@@ -19,7 +20,7 @@ require('../support/index.js');
 
 const RoutePath = Route.extend(routerPath);
 
-describe('.initRoute', () => {
+describe('[INIT_ROUTE]', () => {
 	let route;
 	beforeEach(() => {
 		route = new RoutePath();
@@ -28,7 +29,7 @@ describe('.initRoute', () => {
 	it("[PATH_PART] defaults to '' if is root route", () => {
 		const app = new Overlook();
 		app.attachRouter(route);
-		route.initRoute();
+		route[INIT_ROUTE]();
 		expect(route[PATH_PART]).toBe('');
 	});
 
@@ -37,7 +38,7 @@ describe('.initRoute', () => {
 		const parent = new Route();
 		app.attachRouter(parent);
 		parent.attachChild(route);
-		route.initRoute();
+		route[INIT_ROUTE]();
 		expect(route[PATH_PART]).toBe('');
 	});
 
@@ -45,7 +46,7 @@ describe('.initRoute', () => {
 		const parent = new RoutePath();
 		parent.attachChild(route);
 		route.name = 'abc';
-		route.initRoute();
+		route[INIT_ROUTE]();
 		expect(route[PATH_PART]).toBe('abc');
 	});
 

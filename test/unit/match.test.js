@@ -7,9 +7,10 @@
 'use strict';
 
 // Modules
-const {Route} = require('@overlook/core'),
+const Route = require('@overlook/route'),
+	{MATCH} = require('@overlook/plugin-match'),
 	routerPath = require('@overlook/router-path'),
-	{MATCH, PATH_PART, PATH_UNCONSUMED} = routerPath;
+	{PATH_PART, PATH_UNCONSUMED} = routerPath;
 
 // Init
 require('../support/index.js');

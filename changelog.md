@@ -1,5 +1,58 @@
 # Changelog
 
+## 0.5.0
+
+Breaking changes:
+
+* Rename module `@overlook/plugin-path`
+* Convert to plugin
+* Drop support for Node v8
+
+Bug fixes:
+
+* Update debug instrumentation for latest `@overlook/core`
+
+Refactor:
+
+* Fix lint error
+* Fully specify require file paths
+
+No code:
+
+* File header comments
+
+Dependencies:
+
+* Update `@overlook/router-match` dependency
+* Update `@overlook/router-ordered` dependency
+* Switch `core-util-is` for `is-it-type`
+
+Tests:
+
+* Remove `jest-each` dependency [refactor]
+* Simplify unhandled rejection handling
+* Import from package name [refactor]
+* Run tests in dev mode
+
+Dev:
+
+* Update dev dependencies
+* Bump insecure dependencies
+* Run tests on CI on Node v13 + v14
+* Replace `.npmignore` with `files` list in `package.json`
+* `.editorconfig` config
+* Simplify Jest config
+* ESLint lint dot files
+* ESLint igmore `coverage` dir
+* Remove unnecessary line from `.gitignore`
+* Remove `sudo` from Travis config
+
+Docs:
+
+* Add link to Overlook site in README
+* Versioning policy
+* Update license year
+
 ## 0.4.1
 
 Dependencies:

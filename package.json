@@ -22,7 +22,7 @@
     "@overlook/plugin-ordered": "^0.4.1",
     "@overlook/route": "^0.4.1",
     "has-own-prop": "^2.0.0",
-    "is-it-type": "^1.1.2"
+    "is-it-type": "^3.1.1"
   },
   "devDependencies": {
     "@overlook/core": "^0.9.0",

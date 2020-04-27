@@ -7,8 +7,7 @@
 'use strict';
 
 // Modules
-const Overlook = require('@overlook/core'),
-	Route = require('@overlook/route'),
+const Route = require('@overlook/route'),
 	{HANDLE_ROUTE} = require('@overlook/plugin-match'),
 	pathPlugin = require('@overlook/plugin-path'),
 	{PATH_PART, PARAMS} = pathPlugin;
@@ -68,10 +67,8 @@ routeP.attachChild(routePP);
 const routePW = new PathRoute({[PATH_PART]: '*', [HANDLE_ROUTE]: spy(() => true)});
 routeP.attachChild(routePW);
 
-// Attach router to app
-const app = new Overlook();
-app.attachRouter(router);
-app.init();
+// Init router
+router.init();
 
 // Tests
 

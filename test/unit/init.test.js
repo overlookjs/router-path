@@ -7,8 +7,7 @@
 'use strict';
 
 // Modules
-const Overlook = require('@overlook/core'),
-	Route = require('@overlook/route'),
+const Route = require('@overlook/route'),
 	{INIT_ROUTE} = Route,
 	pathPlugin = require('@overlook/plugin-path'),
 	{PATH_PART} = pathPlugin;
@@ -27,16 +26,12 @@ describe('[INIT_ROUTE]', () => {
 	});
 
 	it("[PATH_PART] defaults to '' if is root route", () => {
-		const app = new Overlook();
-		app.attachRouter(route);
 		route[INIT_ROUTE]();
 		expect(route[PATH_PART]).toBe('');
 	});
 
 	it("[PATH_PART] defaults to '' if no path route above", () => {
-		const app = new Overlook();
 		const parent = new Route();
-		app.attachRouter(parent);
 		parent.attachChild(route);
 		route[INIT_ROUTE]();
 		expect(route[PATH_PART]).toBe('');

@@ -55,7 +55,7 @@ const childWildcard = new PathRoute({
 });
 root.attachChild(childWildcard);
 
-// Attach router to app
+// Init router
 root.init();
 root[PORT] = TEST_PORT;
 

@@ -7,8 +7,7 @@
 'use strict';
 
 // Modules
-const Overlook = require('@overlook/core'),
-	Route = require('@overlook/route'),
+const Route = require('@overlook/route'),
 	pathPlugin = require('@overlook/plugin-path'),
 	{PATH_PART} = pathPlugin;
 
@@ -54,9 +53,7 @@ describe('Ordering', () => { // eslint-disable-line jest/lowercase-name
 			router.attachChild(route1);
 			router.attachChild(route2);
 
-			const app = new Overlook();
-			app.attachRouter(router);
-			app.init();
+			router.init();
 
 			expect(router.children).toBeArrayOfSize(2);
 			expect(router.children[0]).toBe(reorders ? route2 : route1);

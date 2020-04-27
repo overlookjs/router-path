@@ -127,6 +127,10 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 				expect(router[HANDLE_ROUTE]).toHaveBeenCalledWith(req);
 			});
 
+			it('req[PARAMS] is empty object', () => {
+				expect(req[PARAMS]).toEqual({});
+			});
+
 			notHandledByOthersThan(router);
 		});
 
@@ -168,6 +172,10 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 				expect(routeA[HANDLE_ROUTE]).toHaveBeenCalledWith(req);
 			});
 
+			it('req[PARAMS] is empty object', () => {
+				expect(req[PARAMS]).toEqual({});
+			});
+
 			notHandledByOthersThan(routeA);
 		});
 
@@ -181,6 +189,10 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			it('handled by correct named child route', () => {
 				expect(routeB[HANDLE_ROUTE]).toHaveBeenCalledTimes(1);
 				expect(routeB[HANDLE_ROUTE]).toHaveBeenCalledWith(req);
+			});
+
+			it('req[PARAMS] is empty object', () => {
+				expect(req[PARAMS]).toEqual({});
 			});
 
 			notHandledByOthersThan(routeB);
@@ -248,6 +260,10 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 					expect(routeAC[HANDLE_ROUTE]).toHaveBeenCalledWith(req);
 				});
 
+				it('req[PARAMS] is empty object', () => {
+					expect(req[PARAMS]).toEqual({});
+				});
+
 				notHandledByOthersThan(routeAC);
 			});
 
@@ -261,6 +277,10 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 				it('handled by correct named child route', () => {
 					expect(routeAD[HANDLE_ROUTE]).toHaveBeenCalledTimes(1);
 					expect(routeAD[HANDLE_ROUTE]).toHaveBeenCalledWith(req);
+				});
+
+				it('req[PARAMS] is empty object', () => {
+					expect(req[PARAMS]).toEqual({});
 				});
 
 				notHandledByOthersThan(routeAD);

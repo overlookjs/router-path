@@ -50,6 +50,7 @@ describe('Plugin', () => { // eslint-disable-line jest/lowercase-name
 		it.each([
 			['PATH'],
 			['PATH_PART'],
+			['GET_PATH_PART'],
 			['PARAMS']
 		])('%s', (key) => {
 			expect(typeof pathPlugin[key]).toBe('symbol');

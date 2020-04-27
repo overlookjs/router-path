@@ -10,7 +10,7 @@
 const Route = require('@overlook/route'),
 	{INIT_ROUTE} = Route,
 	pathPlugin = require('@overlook/plugin-path'),
-	{PATH_PART} = pathPlugin;
+	{PATH_PART, GET_PATH_PART} = pathPlugin;
 
 // Init
 require('../support/index.js');
@@ -35,6 +35,14 @@ describe('[INIT_ROUTE]', () => {
 		parent.attachChild(route);
 		route[INIT_ROUTE]();
 		expect(route[PATH_PART]).toBe('');
+	});
+
+	it('[PATH_PART] defined by [GET_PATH_PART]()', () => {
+		const parent = new Route();
+		parent.attachChild(route);
+		route[GET_PATH_PART] = () => 'abc';
+		route[INIT_ROUTE]();
+		expect(route[PATH_PART]).toBe('abc');
 	});
 
 	it('inherits [PATH_PART] from .name', () => {

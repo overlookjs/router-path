@@ -17,11 +17,11 @@ require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(pathPlugin);
+const PathRoute = Route.extend(pathPlugin);
 
 let route;
 beforeEach(() => {
-	route = new RoutePath();
+	route = new PathRoute();
 });
 
 describe('[MATCH]', () => {

@@ -21,51 +21,51 @@ const spy = jest.fn;
 // Set-up
 
 // Define route tree
-const RoutePath = Route.extend(pathPlugin);
+const PathRoute = Route.extend(pathPlugin);
 
 // Root
-const router = new RoutePath({[HANDLE_ROUTE]: spy(() => true)});
+const router = new PathRoute({[HANDLE_ROUTE]: spy(() => true)});
 
 // Children
-const routeA = new RoutePath({[PATH_PART]: 'a', [HANDLE_ROUTE]: spy(() => true)});
+const routeA = new PathRoute({[PATH_PART]: 'a', [HANDLE_ROUTE]: spy(() => true)});
 router.attachChild(routeA);
 
-const routeB = new RoutePath({[PATH_PART]: 'b', [HANDLE_ROUTE]: spy(() => true)});
+const routeB = new PathRoute({[PATH_PART]: 'b', [HANDLE_ROUTE]: spy(() => true)});
 router.attachChild(routeB);
 
-const routeP = new RoutePath({[PATH_PART]: ':paramP', [HANDLE_ROUTE]: spy(() => true)});
+const routeP = new PathRoute({[PATH_PART]: ':paramP', [HANDLE_ROUTE]: spy(() => true)});
 router.attachChild(routeP);
 
-const routeW = new RoutePath({[PATH_PART]: '*', [HANDLE_ROUTE]: spy(() => true)});
+const routeW = new PathRoute({[PATH_PART]: '*', [HANDLE_ROUTE]: spy(() => true)});
 router.attachChild(routeW);
 
 // Children of named route
-const routeAC = new RoutePath({[PATH_PART]: 'c', [HANDLE_ROUTE]: spy(() => true)});
+const routeAC = new PathRoute({[PATH_PART]: 'c', [HANDLE_ROUTE]: spy(() => true)});
 routeA.attachChild(routeAC);
 
-const routeAD = new RoutePath({[PATH_PART]: 'd', [HANDLE_ROUTE]: spy(() => true)});
+const routeAD = new PathRoute({[PATH_PART]: 'd', [HANDLE_ROUTE]: spy(() => true)});
 routeA.attachChild(routeAD);
 
-const routeAP = new RoutePath({[PATH_PART]: ':paramAP', [HANDLE_ROUTE]: spy(() => true)});
+const routeAP = new PathRoute({[PATH_PART]: ':paramAP', [HANDLE_ROUTE]: spy(() => true)});
 routeA.attachChild(routeAP);
 
-const routeAW = new RoutePath({[PATH_PART]: '*', [HANDLE_ROUTE]: spy(() => true)});
+const routeAW = new PathRoute({[PATH_PART]: '*', [HANDLE_ROUTE]: spy(() => true)});
 routeA.attachChild(routeAW);
 
-const routeBW = new RoutePath({[PATH_PART]: '*', [HANDLE_ROUTE]: spy(() => true)});
+const routeBW = new PathRoute({[PATH_PART]: '*', [HANDLE_ROUTE]: spy(() => true)});
 routeB.attachChild(routeBW);
 
 // Children of param route
-const routePE = new RoutePath({[PATH_PART]: 'e', [HANDLE_ROUTE]: spy(() => true)});
+const routePE = new PathRoute({[PATH_PART]: 'e', [HANDLE_ROUTE]: spy(() => true)});
 routeP.attachChild(routePE);
 
-const routePF = new RoutePath({[PATH_PART]: 'f', [HANDLE_ROUTE]: spy(() => true)});
+const routePF = new PathRoute({[PATH_PART]: 'f', [HANDLE_ROUTE]: spy(() => true)});
 routeP.attachChild(routePF);
 
-const routePP = new RoutePath({[PATH_PART]: ':paramPP', [HANDLE_ROUTE]: spy(() => true)});
+const routePP = new PathRoute({[PATH_PART]: ':paramPP', [HANDLE_ROUTE]: spy(() => true)});
 routeP.attachChild(routePP);
 
-const routePW = new RoutePath({[PATH_PART]: '*', [HANDLE_ROUTE]: spy(() => true)});
+const routePW = new PathRoute({[PATH_PART]: '*', [HANDLE_ROUTE]: spy(() => true)});
 routeP.attachChild(routePW);
 
 // Attach router to app

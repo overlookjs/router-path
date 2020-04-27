@@ -17,7 +17,7 @@ require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(pathPlugin);
+const PathRoute = Route.extend(pathPlugin);
 
 describe('Ordering', () => { // eslint-disable-line jest/lowercase-name
 	describe('routes are ordered with', () => {
@@ -49,8 +49,8 @@ describe('Ordering', () => { // eslint-disable-line jest/lowercase-name
 
 		it.each(cases)('%s route %s %s route', (_1, _2, _3, pathPart1, pathPart2, reorders) => {
 			const router = new Route(),
-				route1 = new RoutePath({[PATH_PART]: pathPart1}),
-				route2 = new RoutePath({[PATH_PART]: pathPart2});
+				route1 = new PathRoute({[PATH_PART]: pathPart1}),
+				route2 = new PathRoute({[PATH_PART]: pathPart2});
 			router.attachChild(route1);
 			router.attachChild(route2);
 

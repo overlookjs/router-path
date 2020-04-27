@@ -17,7 +17,7 @@ require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(pathPlugin);
+const PathRoute = Route.extend(pathPlugin);
 
 describe('[HANDLE_MATCH]', () => {
 	describe.each([
@@ -27,7 +27,7 @@ describe('[HANDLE_MATCH]', () => {
 		describe(`[${methodName}] returns non-null`, () => {
 			let route, handlerPath, handlerParams;
 			beforeEach(() => {
-				route = new RoutePath({
+				route = new PathRoute({
 					[methodKey](req) {
 						handlerPath = req[PATH];
 						handlerParams = req[PARAMS];
@@ -78,7 +78,7 @@ describe('[HANDLE_MATCH]', () => {
 		describe(`[${methodName}] returns null`, () => {
 			let route;
 			beforeEach(() => {
-				route = new RoutePath({
+				route = new PathRoute({
 					[methodKey]() {
 						return null;
 					}

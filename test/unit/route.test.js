@@ -16,11 +16,11 @@ require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(pathPlugin);
+const PathRoute = Route.extend(pathPlugin);
 
-describe('RoutePath constructor', () => { // eslint-disable-line jest/lowercase-name
+describe('PathRoute constructor', () => { // eslint-disable-line jest/lowercase-name
 	it('initializes undefined [PATH_PART] property', () => {
-		const route = new RoutePath();
+		const route = new PathRoute();
 		expect(Object.getOwnPropertySymbols(route)).toContain(PATH_PART);
 		expect(route[PATH_PART]).toBeUndefined();
 	});

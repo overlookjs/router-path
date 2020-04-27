@@ -18,12 +18,12 @@ require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(pathPlugin);
+const PathRoute = Route.extend(pathPlugin);
 
 describe('[INIT_ROUTE]', () => {
 	let route;
 	beforeEach(() => {
-		route = new RoutePath();
+		route = new PathRoute();
 	});
 
 	it("[PATH_PART] defaults to '' if is root route", () => {
@@ -43,7 +43,7 @@ describe('[INIT_ROUTE]', () => {
 	});
 
 	it('inherits [PATH_PART] from .name', () => {
-		const parent = new RoutePath();
+		const parent = new PathRoute();
 		parent.attachChild(route);
 		route.name = 'abc';
 		route[INIT_ROUTE]();
@@ -51,7 +51,7 @@ describe('[INIT_ROUTE]', () => {
 	});
 
 	it('throws error if [PATH_PART] is undefined and another path route above', () => {
-		const parent = new RoutePath();
+		const parent = new PathRoute();
 		parent.attachChild(route);
 		expect(() => {
 			route.init();

@@ -18,11 +18,11 @@ require('../support/index.js');
 
 // Tests
 
-const RoutePath = Route.extend(pathPlugin);
+const PathRoute = Route.extend(pathPlugin);
 
 describe('`[IS_BEFORE]()`', () => {
 	it('comparing path route to non-path route, returns null', () => {
-		const route = new RoutePath(),
+		const route = new PathRoute(),
 			route2 = new Route();
 		const ret = route[IS_BEFORE](route2);
 		expect(ret).toBeNull();
@@ -54,8 +54,8 @@ describe('`[IS_BEFORE]()`', () => {
 		it.each(comparisons)('%s route returns %s', (type2, expected) => {
 			const pathPart1 = PATH_PARTS[type1],
 				pathPart2 = PATH_PARTS[type2];
-			const route1 = new RoutePath({[PATH_PART]: pathPart1}),
-				route2 = new RoutePath({[PATH_PART]: pathPart2});
+			const route1 = new PathRoute({[PATH_PART]: pathPart1}),
+				route2 = new PathRoute({[PATH_PART]: pathPart2});
 			route1[IS_INITIALIZED] = true;
 			route2[IS_INITIALIZED] = true;
 

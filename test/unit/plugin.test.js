@@ -23,26 +23,26 @@ describe('Plugin', () => { // eslint-disable-line jest/lowercase-name
 	});
 
 	describe('when passed to `Route.extend()`', () => {
-		let RoutePath;
+		let PathRoute;
 		beforeEach(() => {
-			RoutePath = Route.extend(pathPlugin);
+			PathRoute = Route.extend(pathPlugin);
 		});
 
 		it('returns subclass of Route', () => {
-			expect(RoutePath).toBeFunction();
-			expect(RoutePath.prototype).toBeInstanceOf(Route);
+			expect(PathRoute).toBeFunction();
+			expect(PathRoute.prototype).toBeInstanceOf(Route);
 		});
 
 		it('returns subclass of RouteMatch', () => {
-			expect(RoutePath).toBeFunction();
+			expect(PathRoute).toBeFunction();
 			const RouteMatch = Route.extend(pluginMatch);
-			expect(RoutePath.prototype).toBeInstanceOf(RouteMatch);
+			expect(PathRoute.prototype).toBeInstanceOf(RouteMatch);
 		});
 
 		it('returns subclass of RouteOrdered', () => {
-			expect(RoutePath).toBeFunction();
+			expect(PathRoute).toBeFunction();
 			const RouteOrdered = Route.extend(pluginMatch).extend(pluginOrdered);
-			expect(RoutePath.prototype).toBeInstanceOf(RouteOrdered);
+			expect(PathRoute.prototype).toBeInstanceOf(RouteOrdered);
 		});
 	});
 

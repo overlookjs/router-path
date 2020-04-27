@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "@overlook/core": "^0.9.0",
-    "@overlook/plugin-serve-http": "^0.1.1",
-    "@overlook/plugin-start": "^0.1.1",
+    "@overlook/plugin-serve-http": "^0.1.2",
+    "@overlook/plugin-start": "^0.1.2",
     "@overlookmotel/eslint-config": "^7.1.2",
     "@overlookmotel/eslint-config-jest": "^4.0.1",
     "@overlookmotel/eslint-config-node": "^2.0.0",

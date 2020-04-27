@@ -257,6 +257,56 @@ describe('[MATCH]', () => {
 				});
 			});
 		});
+
+		describe('when wildcard param match', () => {
+			describe('when 1 part remaining, returns', () => {
+				let ret;
+				beforeEach(() => {
+					route[PATH_PART] = '*id';
+					ret = route[MATCH]({url: '/abc'});
+				});
+
+				it('object', () => {
+					expect(ret).toBeObject();
+				});
+
+				it('.exact=true', () => {
+					expect(ret.exact).toBeTrue();
+				});
+
+				it('.pathConsumed=<path>', () => {
+					expect(ret.pathConsumed).toBe('/abc');
+				});
+
+				it('.params={<param name>: <path minus start slash>}', () => {
+					expect(ret.params).toEqual({id: 'abc'});
+				});
+			});
+
+			describe('when multiple parts remaining, returns', () => {
+				let ret;
+				beforeEach(() => {
+					route[PATH_PART] = '*id';
+					ret = route[MATCH]({url: '/a/b/c'});
+				});
+
+				it('object', () => {
+					expect(ret).toBeObject();
+				});
+
+				it('.exact=true', () => {
+					expect(ret.exact).toBeTrue();
+				});
+
+				it('.pathConsumed=<path>', () => {
+					expect(ret.pathConsumed).toBe('/a/b/c');
+				});
+
+				it('.params={<param name>: <path minus start slash>}', () => {
+					expect(ret.params).toEqual({id: 'a/b/c'});
+				});
+			});
+		});
 	});
 
 	describe('when parts of path already consumed', () => {
@@ -465,6 +515,58 @@ describe('[MATCH]', () => {
 
 				it(".params={'*': <path>}", () => {
 					expect(ret.params).toEqual({'*': 'b/c/d'});
+				});
+			});
+		});
+
+		describe('when wildcard param match', () => {
+			describe('when 1 part remaining, returns', () => {
+				let ret;
+				beforeEach(() => {
+					const req = createReq('/abc/def');
+					route[PATH_PART] = '*id';
+					ret = route[MATCH](req);
+				});
+
+				it('object', () => {
+					expect(ret).toBeObject();
+				});
+
+				it('.exact=true', () => {
+					expect(ret.exact).toBeTrue();
+				});
+
+				it('.pathConsumed=<path>', () => {
+					expect(ret.pathConsumed).toBe('/def');
+				});
+
+				it('.params={<param name>: <path>}', () => {
+					expect(ret.params).toEqual({id: 'def'});
+				});
+			});
+
+			describe('when multiple parts remaining, returns', () => {
+				let ret;
+				beforeEach(() => {
+					const req = createReq('/a/b/c/d');
+					route[PATH_PART] = '*id';
+					ret = route[MATCH](req);
+				});
+
+				it('object', () => {
+					expect(ret).toBeObject();
+				});
+
+				it('.exact=true', () => {
+					expect(ret.exact).toBeTrue();
+				});
+
+				it('.pathConsumed=<path>', () => {
+					expect(ret.pathConsumed).toBe('/b/c/d');
+				});
+
+				it('.params={<param name>: <path>}', () => {
+					expect(ret.params).toEqual({id: 'b/c/d'});
 				});
 			});
 		});

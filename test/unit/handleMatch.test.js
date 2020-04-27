@@ -10,7 +10,7 @@
 const Route = require('@overlook/route'),
 	{HANDLE_MATCH, HANDLE_ROUTE, HANDLE_CHILDREN} = require('@overlook/plugin-match'),
 	pathPlugin = require('@overlook/plugin-path'),
-	{PATH_UNCONSUMED, PARAMS} = pathPlugin;
+	{PATH, PARAMS} = pathPlugin;
 
 // Init
 require('../support/index.js');
@@ -25,32 +25,32 @@ describe('[HANDLE_MATCH]', () => {
 		['non-exact', false, 'HANDLE_CHILDREN', HANDLE_CHILDREN]
 	])('%s match', (testName, exact, methodName, methodKey) => {
 		describe(`[${methodName}] returns non-null`, () => {
-			let route, handlerPathUnconsumed, handlerParams;
+			let route, handlerPath, handlerParams;
 			beforeEach(() => {
 				route = new RoutePath({
 					[methodKey](req) {
-						handlerPathUnconsumed = req[PATH_UNCONSUMED];
+						handlerPath = req[PATH];
 						handlerParams = req[PARAMS];
 						return true;
 					}
 				});
 			});
 
-			describe(`sets req[PATH_UNCONSUMED] before calling [${methodName}]`, () => {
+			describe(`sets req[PATH] before calling [${methodName}]`, () => {
 				it('when undefined', () => {
 					route[HANDLE_MATCH](
 						{url: 'abc/def'},
 						{exact, pathConsumed: 'abc/'}
 					);
-					expect(handlerPathUnconsumed).toBe('def');
+					expect(handlerPath).toBe('def');
 				});
 
 				it('when defined already', () => {
 					route[HANDLE_MATCH](
-						{url: 'abc/def/ghi', [PATH_UNCONSUMED]: 'def/ghi'},
+						{url: 'abc/def/ghi', [PATH]: 'def/ghi'},
 						{exact, pathConsumed: 'def/'}
 					);
-					expect(handlerPathUnconsumed).toBe('ghi');
+					expect(handlerPath).toBe('ghi');
 				});
 			});
 
@@ -85,17 +85,17 @@ describe('[HANDLE_MATCH]', () => {
 				});
 			});
 
-			describe(`resets req[PATH_UNCONSUMED] after calling [${methodName}]`, () => {
+			describe(`resets req[PATH] after calling [${methodName}]`, () => {
 				it('when undefined', () => {
 					const req = {url: 'abc/def'};
 					route[HANDLE_MATCH](req, {exact, pathConsumed: 'abc/'});
-					expect(req[PATH_UNCONSUMED]).toBeUndefined();
+					expect(req[PATH]).toBeUndefined();
 				});
 
 				it('when defined already', () => {
-					const req = {url: 'abc/def/ghi', [PATH_UNCONSUMED]: 'def/ghi'};
+					const req = {url: 'abc/def/ghi', [PATH]: 'def/ghi'};
 					route[HANDLE_MATCH](req, {exact, pathConsumed: 'abc/'});
-					expect(req[PATH_UNCONSUMED]).toBe('def/ghi');
+					expect(req[PATH]).toBe('def/ghi');
 				});
 			});
 

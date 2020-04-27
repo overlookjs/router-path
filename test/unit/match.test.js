@@ -10,7 +10,7 @@
 const Route = require('@overlook/route'),
 	{MATCH} = require('@overlook/plugin-match'),
 	pathPlugin = require('@overlook/plugin-path'),
-	{PATH_PART, PATH_UNCONSUMED} = pathPlugin;
+	{PATH, PATH_PART} = pathPlugin;
 
 // Init
 require('../support/index.js');
@@ -264,7 +264,7 @@ describe('[MATCH]', () => {
 			// Consume with first path part consumed
 			return {
 				path,
-				[PATH_UNCONSUMED]: path.slice(path.indexOf('/', 1))
+				[PATH]: path.slice(path.indexOf('/', 1))
 			};
 		}
 

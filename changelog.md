@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.6.0
+
+Breaking changes:
+
+* Consume path from `req.url`
+* Rename `PATH_UNCONSUMED` symbol to `PATH`
+
+Features:
+
+* `[GET_PATH_PART]` method
+* Named wildcards
+
+Bug fixes:
+
+* Always create `req[PARAMS]`
+* Determine `[PATH_PART]` before ordering
+
+Dependencies:
+
+* Update dependencies
+
+Tests:
+
+* With `@overlook/plugin-serve-http`
+* Remove dependency on `@overlook/core`
+* Rename vars [refactor]
+
+Dev:
+
+* Update dev dependencies
+
+Docs:
+
+* README
+
 ## 0.5.0
 
 Breaking changes:

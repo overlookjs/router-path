@@ -28,7 +28,7 @@ describe('[MATCH]', () => {
 	describe('at base of path', () => {
 		it('when no match, returns null', () => {
 			route[PATH_PART] = 'abc';
-			const ret = route[MATCH]({path: '/def'});
+			const ret = route[MATCH]({url: '/def'});
 			expect(ret).toBeNull();
 		});
 
@@ -36,7 +36,7 @@ describe('[MATCH]', () => {
 			let ret;
 			beforeEach(() => {
 				route[PATH_PART] = '';
-				ret = route[MATCH]({path: '/'});
+				ret = route[MATCH]({url: '/'});
 			});
 
 			it('object', () => {
@@ -56,7 +56,7 @@ describe('[MATCH]', () => {
 			let ret;
 			beforeEach(() => {
 				route[PATH_PART] = '';
-				ret = route[MATCH]({path: '/abc'});
+				ret = route[MATCH]({url: '/abc'});
 			});
 
 			it('object', () => {
@@ -77,7 +77,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = 'abc';
-					ret = route[MATCH]({path: '/abc'});
+					ret = route[MATCH]({url: '/abc'});
 				});
 
 				it('object', () => {
@@ -97,7 +97,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = 'abc';
-					ret = route[MATCH]({path: '/abc/'});
+					ret = route[MATCH]({url: '/abc/'});
 				});
 
 				it('object', () => {
@@ -118,7 +118,7 @@ describe('[MATCH]', () => {
 			let ret;
 			beforeEach(() => {
 				route[PATH_PART] = 'abc';
-				ret = route[MATCH]({path: '/abc/def'});
+				ret = route[MATCH]({url: '/abc/def'});
 			});
 
 			it('object', () => {
@@ -139,7 +139,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = ':id';
-					ret = route[MATCH]({path: '/abc'});
+					ret = route[MATCH]({url: '/abc'});
 				});
 
 				it('object', () => {
@@ -163,7 +163,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = ':id';
-					ret = route[MATCH]({path: '/abc/'});
+					ret = route[MATCH]({url: '/abc/'});
 				});
 
 				it('object', () => {
@@ -188,7 +188,7 @@ describe('[MATCH]', () => {
 			let ret;
 			beforeEach(() => {
 				route[PATH_PART] = ':id';
-				ret = route[MATCH]({path: '/abc/def'});
+				ret = route[MATCH]({url: '/abc/def'});
 			});
 
 			it('object', () => {
@@ -213,7 +213,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = '*';
-					ret = route[MATCH]({path: '/abc'});
+					ret = route[MATCH]({url: '/abc'});
 				});
 
 				it('object', () => {
@@ -237,7 +237,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = '*';
-					ret = route[MATCH]({path: '/a/b/c'});
+					ret = route[MATCH]({url: '/a/b/c'});
 				});
 
 				it('object', () => {

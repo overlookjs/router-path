@@ -118,7 +118,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 		describe("when root route has [PATH_PART] = ''", () => {
 			let req;
 			beforeEach(() => {
-				req = {path: '/'};
+				req = {url: '/'};
 				router.handle(req);
 			});
 
@@ -133,7 +133,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 		describe('when root route is wildcard', () => {
 			let req;
 			beforeEach(() => {
-				req = {path: '/'};
+				req = {url: '/'};
 				router[PATH_PART] = '*';
 				router.handle(req);
 			});
@@ -159,7 +159,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 		describe('matching 1st named child', () => {
 			let req;
 			beforeEach(() => {
-				req = {path: '/a'};
+				req = {url: '/a'};
 				router.handle(req);
 			});
 
@@ -174,7 +174,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 		describe('matching 2nd named child', () => {
 			let req;
 			beforeEach(() => {
-				req = {path: '/b'};
+				req = {url: '/b'};
 				router.handle(req);
 			});
 
@@ -189,7 +189,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 		describe('matching no named child', () => {
 			let req;
 			beforeEach(() => {
-				req = {path: '/p'};
+				req = {url: '/p'};
 				router.handle(req);
 			});
 
@@ -212,7 +212,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 				removedIndex = router.children.indexOf(routeP);
 				router.children.splice(removedIndex, 1);
 
-				req = {path: '/w'};
+				req = {url: '/w'};
 				router.handle(req);
 			});
 
@@ -239,7 +239,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching 1st named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {path: '/a/c'};
+					req = {url: '/a/c'};
 					router.handle(req);
 				});
 
@@ -254,7 +254,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching 2nd named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {path: '/a/d'};
+					req = {url: '/a/d'};
 					router.handle(req);
 				});
 
@@ -269,7 +269,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching no named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {path: '/a/ap'};
+					req = {url: '/a/ap'};
 					router.handle(req);
 				});
 
@@ -288,7 +288,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching no named child and no param child', () => {
 				let req;
 				beforeEach(() => {
-					req = {path: '/b/w'};
+					req = {url: '/b/w'};
 					router.handle(req);
 				});
 
@@ -309,7 +309,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching 1st named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {path: '/p/e'};
+					req = {url: '/p/e'};
 					router.handle(req);
 				});
 
@@ -328,7 +328,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching 2nd named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {path: '/p/f'};
+					req = {url: '/p/f'};
 					router.handle(req);
 				});
 
@@ -347,7 +347,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching no named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {path: '/p/pp'};
+					req = {url: '/p/pp'};
 					router.handle(req);
 				});
 
@@ -370,7 +370,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 					removedIndex = routeP.children.indexOf(routePP);
 					routeP.children.splice(removedIndex, 1);
 
-					req = {path: '/p/w'};
+					req = {url: '/p/w'};
 					router.handle(req);
 				});
 
@@ -399,7 +399,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 				removedIndex = router.children.indexOf(routeP);
 				router.children.splice(removedIndex, 1);
 
-				req = {path: '/w/x'};
+				req = {url: '/w/x'};
 				router.handle(req);
 			});
 

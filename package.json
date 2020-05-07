@@ -25,7 +25,7 @@
     "is-it-type": "^3.1.1"
   },
   "devDependencies": {
-    "@overlook/plugin-serve-http": "^0.1.2",
+    "@overlook/plugin-serve-http": "^0.2.0",
     "@overlook/plugin-start": "^0.1.2",
     "@overlookmotel/eslint-config": "^7.1.2",
     "@overlookmotel/eslint-config-jest": "^4.0.1",

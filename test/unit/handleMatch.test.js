@@ -10,7 +10,7 @@
 const Route = require('@overlook/route'),
 	{HANDLE_MATCH, HANDLE_ROUTE, HANDLE_CHILDREN} = require('@overlook/plugin-match'),
 	pathPlugin = require('@overlook/plugin-path'),
-	{PATH, PARAMS} = pathPlugin;
+	{PARAMS, PATH_UNCONSUMED} = pathPlugin;
 
 // Init
 require('../support/index.js');
@@ -29,14 +29,14 @@ describe('[HANDLE_MATCH]', () => {
 			beforeEach(() => {
 				route = new PathRoute({
 					[methodKey](req) {
-						handlerPath = req[PATH];
+						handlerPath = req[PATH_UNCONSUMED];
 						handlerParams = req[PARAMS];
 						return true;
 					}
 				});
 			});
 
-			describe(`sets req[PATH] before calling [${methodName}]`, () => {
+			describe(`sets req[PATH_UNCONSUMED] before calling [${methodName}]`, () => {
 				it('when undefined', () => {
 					route[HANDLE_MATCH](
 						{url: 'abc/def'},
@@ -47,7 +47,7 @@ describe('[HANDLE_MATCH]', () => {
 
 				it('when defined already', () => {
 					route[HANDLE_MATCH](
-						{url: 'abc/def/ghi', [PATH]: 'def/ghi'},
+						{url: 'abc/def/ghi', [PATH_UNCONSUMED]: 'def/ghi'},
 						{exact, pathConsumed: 'def/'}
 					);
 					expect(handlerPath).toBe('ghi');
@@ -85,17 +85,17 @@ describe('[HANDLE_MATCH]', () => {
 				});
 			});
 
-			describe(`resets req[PATH] after calling [${methodName}]`, () => {
+			describe(`resets req[PATH_UNCONSUMED] after calling [${methodName}]`, () => {
 				it('when undefined', () => {
 					const req = {url: 'abc/def'};
 					route[HANDLE_MATCH](req, {exact, pathConsumed: 'abc/'});
-					expect(req[PATH]).toBeUndefined();
+					expect(req[PATH_UNCONSUMED]).toBeUndefined();
 				});
 
 				it('when defined already', () => {
-					const req = {url: 'abc/def/ghi', [PATH]: 'def/ghi'};
+					const req = {url: 'abc/def/ghi', [PATH_UNCONSUMED]: 'def/ghi'};
 					route[HANDLE_MATCH](req, {exact, pathConsumed: 'abc/'});
-					expect(req[PATH]).toBe('def/ghi');
+					expect(req[PATH_UNCONSUMED]).toBe('def/ghi');
 				});
 			});
 

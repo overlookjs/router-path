@@ -9,6 +9,7 @@
 // Modules
 const Route = require('@overlook/route'),
 	{HANDLE_ROUTE} = require('@overlook/plugin-match'),
+	{PATH} = require('@overlook/plugin-request'),
 	pathPlugin = require('@overlook/plugin-path'),
 	{PATH_PART, PARAMS} = pathPlugin;
 
@@ -115,7 +116,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 		describe("when root route has [PATH_PART] = ''", () => {
 			let req;
 			beforeEach(() => {
-				req = {url: '/'};
+				req = {[PATH]: '/'};
 				router.handle(req);
 			});
 
@@ -134,7 +135,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 		describe('when root route is wildcard', () => {
 			let req;
 			beforeEach(() => {
-				req = {url: '/'};
+				req = {[PATH]: '/'};
 				router[PATH_PART] = '*';
 				router.handle(req);
 			});
@@ -160,7 +161,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 		describe('matching 1st named child', () => {
 			let req;
 			beforeEach(() => {
-				req = {url: '/a'};
+				req = {[PATH]: '/a'};
 				router.handle(req);
 			});
 
@@ -179,7 +180,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 		describe('matching 2nd named child', () => {
 			let req;
 			beforeEach(() => {
-				req = {url: '/b'};
+				req = {[PATH]: '/b'};
 				router.handle(req);
 			});
 
@@ -198,7 +199,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 		describe('matching no named child', () => {
 			let req;
 			beforeEach(() => {
-				req = {url: '/p'};
+				req = {[PATH]: '/p'};
 				router.handle(req);
 			});
 
@@ -221,7 +222,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 				removedIndex = router.children.indexOf(routeP);
 				router.children.splice(removedIndex, 1);
 
-				req = {url: '/w'};
+				req = {[PATH]: '/w'};
 				router.handle(req);
 			});
 
@@ -248,7 +249,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching 1st named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {url: '/a/c'};
+					req = {[PATH]: '/a/c'};
 					router.handle(req);
 				});
 
@@ -267,7 +268,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching 2nd named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {url: '/a/d'};
+					req = {[PATH]: '/a/d'};
 					router.handle(req);
 				});
 
@@ -286,7 +287,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching no named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {url: '/a/ap'};
+					req = {[PATH]: '/a/ap'};
 					router.handle(req);
 				});
 
@@ -305,7 +306,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching no named child and no param child', () => {
 				let req;
 				beforeEach(() => {
-					req = {url: '/b/w'};
+					req = {[PATH]: '/b/w'};
 					router.handle(req);
 				});
 
@@ -326,7 +327,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching 1st named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {url: '/p/e'};
+					req = {[PATH]: '/p/e'};
 					router.handle(req);
 				});
 
@@ -345,7 +346,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching 2nd named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {url: '/p/f'};
+					req = {[PATH]: '/p/f'};
 					router.handle(req);
 				});
 
@@ -364,7 +365,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 			describe('matching no named child', () => {
 				let req;
 				beforeEach(() => {
-					req = {url: '/p/pp'};
+					req = {[PATH]: '/p/pp'};
 					router.handle(req);
 				});
 
@@ -387,7 +388,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 					removedIndex = routeP.children.indexOf(routePP);
 					routeP.children.splice(removedIndex, 1);
 
-					req = {url: '/p/w'};
+					req = {[PATH]: '/p/w'};
 					router.handle(req);
 				});
 
@@ -416,7 +417,7 @@ describe('Matching', () => { // eslint-disable-line jest/lowercase-name
 				removedIndex = router.children.indexOf(routeP);
 				router.children.splice(removedIndex, 1);
 
-				req = {url: '/w/x'};
+				req = {[PATH]: '/w/x'};
 				router.handle(req);
 			});
 

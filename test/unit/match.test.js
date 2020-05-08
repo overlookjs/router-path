@@ -9,6 +9,7 @@
 // Modules
 const Route = require('@overlook/route'),
 	{MATCH} = require('@overlook/plugin-match'),
+	{PATH} = require('@overlook/plugin-request'),
 	pathPlugin = require('@overlook/plugin-path'),
 	{PATH_PART, PATH_UNCONSUMED} = pathPlugin;
 
@@ -28,7 +29,7 @@ describe('[MATCH]', () => {
 	describe('at base of path', () => {
 		it('when no match, returns null', () => {
 			route[PATH_PART] = 'abc';
-			const ret = route[MATCH]({url: '/def'});
+			const ret = route[MATCH]({[PATH]: '/def'});
 			expect(ret).toBeNull();
 		});
 
@@ -36,7 +37,7 @@ describe('[MATCH]', () => {
 			let ret;
 			beforeEach(() => {
 				route[PATH_PART] = '';
-				ret = route[MATCH]({url: '/'});
+				ret = route[MATCH]({[PATH]: '/'});
 			});
 
 			it('object', () => {
@@ -56,7 +57,7 @@ describe('[MATCH]', () => {
 			let ret;
 			beforeEach(() => {
 				route[PATH_PART] = '';
-				ret = route[MATCH]({url: '/abc'});
+				ret = route[MATCH]({[PATH]: '/abc'});
 			});
 
 			it('object', () => {
@@ -77,7 +78,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = 'abc';
-					ret = route[MATCH]({url: '/abc'});
+					ret = route[MATCH]({[PATH]: '/abc'});
 				});
 
 				it('object', () => {
@@ -97,7 +98,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = 'abc';
-					ret = route[MATCH]({url: '/abc/'});
+					ret = route[MATCH]({[PATH]: '/abc/'});
 				});
 
 				it('object', () => {
@@ -118,7 +119,7 @@ describe('[MATCH]', () => {
 			let ret;
 			beforeEach(() => {
 				route[PATH_PART] = 'abc';
-				ret = route[MATCH]({url: '/abc/def'});
+				ret = route[MATCH]({[PATH]: '/abc/def'});
 			});
 
 			it('object', () => {
@@ -139,7 +140,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = ':id';
-					ret = route[MATCH]({url: '/abc'});
+					ret = route[MATCH]({[PATH]: '/abc'});
 				});
 
 				it('object', () => {
@@ -163,7 +164,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = ':id';
-					ret = route[MATCH]({url: '/abc/'});
+					ret = route[MATCH]({[PATH]: '/abc/'});
 				});
 
 				it('object', () => {
@@ -188,7 +189,7 @@ describe('[MATCH]', () => {
 			let ret;
 			beforeEach(() => {
 				route[PATH_PART] = ':id';
-				ret = route[MATCH]({url: '/abc/def'});
+				ret = route[MATCH]({[PATH]: '/abc/def'});
 			});
 
 			it('object', () => {
@@ -213,7 +214,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = '*';
-					ret = route[MATCH]({url: '/abc'});
+					ret = route[MATCH]({[PATH]: '/abc'});
 				});
 
 				it('object', () => {
@@ -237,7 +238,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = '*';
-					ret = route[MATCH]({url: '/a/b/c'});
+					ret = route[MATCH]({[PATH]: '/a/b/c'});
 				});
 
 				it('object', () => {
@@ -263,7 +264,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = '*id';
-					ret = route[MATCH]({url: '/abc'});
+					ret = route[MATCH]({[PATH]: '/abc'});
 				});
 
 				it('object', () => {
@@ -287,7 +288,7 @@ describe('[MATCH]', () => {
 				let ret;
 				beforeEach(() => {
 					route[PATH_PART] = '*id';
-					ret = route[MATCH]({url: '/a/b/c'});
+					ret = route[MATCH]({[PATH]: '/a/b/c'});
 				});
 
 				it('object', () => {

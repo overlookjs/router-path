@@ -10,9 +10,10 @@
 const http = require('http'),
 	Route = require('@overlook/route'),
 	httpPlugin = require('@overlook/plugin-serve-http'),
-	{PORT} = httpPlugin,
+	{PORT, REQ, RES, URL, METHOD} = httpPlugin,
 	{START, STOP} = require('@overlook/plugin-start'),
 	{HANDLE_ROUTE} = require('@overlook/plugin-match'),
+	{REQ_TYPE, PATH} = require('@overlook/plugin-request'),
 	axios = require('axios'),
 	pathPlugin = require('@overlook/plugin-path'),
 	{PATH_PART, PARAMS} = pathPlugin;
@@ -33,25 +34,25 @@ const PathRoute = Route.extend(pathPlugin),
 
 // Root
 const root = new RootRoute({
-	[HANDLE_ROUTE]: spy(req => req.res.end(`root serving ${req.url}`))
+	[HANDLE_ROUTE]: spy(req => req[RES].end(`root serving ${req[URL]}`))
 });
 
 // Children
 const childStatic = new PathRoute({
 	[PATH_PART]: 'a',
-	[HANDLE_ROUTE]: spy(req => req.res.end(`childStatic serving ${req.url}`))
+	[HANDLE_ROUTE]: spy(req => req[RES].end(`childStatic serving ${req[URL]}`))
 });
 root.attachChild(childStatic);
 
 const childParam = new PathRoute({
 	[PATH_PART]: ':prop',
-	[HANDLE_ROUTE]: spy(req => req.res.end(`childParam serving ${req.url}`))
+	[HANDLE_ROUTE]: spy(req => req[RES].end(`childParam serving ${req[URL]}`))
 });
 root.attachChild(childParam);
 
 const childWildcard = new PathRoute({
 	[PATH_PART]: '*',
-	[HANDLE_ROUTE]: spy(req => req.res.end(`childWildcard serving ${req.url}`))
+	[HANDLE_ROUTE]: spy(req => req[RES].end(`childWildcard serving ${req[URL]}`))
 });
 root.attachChild(childWildcard);
 
@@ -92,17 +93,27 @@ describe('Serving with @overlook/plugin-serve-http', () => { // eslint-disable-l
 			const args = root[HANDLE_ROUTE].mock.calls[0];
 			expect(args).toBeArrayOfSize(1);
 			const req = args[0];
-			expect(req).toBeInstanceOf(http.IncomingMessage);
+			expect(req).toBeObject();
 		});
 
-		it('calls [HANDLE_ROUTE] with req.method', () => {
+		it('calls [HANDLE_ROUTE] with req[REQ_TYPE]', () => {
 			const req = root[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.method).toBe('GET');
+			expect(req[REQ_TYPE]).toBe('HTTP');
 		});
 
-		it('calls [HANDLE_ROUTE] with req.url', () => {
+		it('calls [HANDLE_ROUTE] with req[METHOD]', () => {
 			const req = root[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.url).toBe('/');
+			expect(req[METHOD]).toBe('GET');
+		});
+
+		it('calls [HANDLE_ROUTE] with req[URL]', () => {
+			const req = root[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[URL]).toBe('/');
+		});
+
+		it('calls [HANDLE_ROUTE] with req[PATH]', () => {
+			const req = root[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[PATH]).toBe('/');
 		});
 
 		it('calls [HANDLE_ROUTE] with empty req[PARAMS]', () => {
@@ -110,9 +121,14 @@ describe('Serving with @overlook/plugin-serve-http', () => { // eslint-disable-l
 			expect(req[PARAMS]).toEqual({});
 		});
 
-		it('calls [HANDLE_ROUTE] with req.res', () => {
+		it('calls [HANDLE_ROUTE] with req[REQ]', () => {
 			const req = root[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.res).toBeInstanceOf(http.ServerResponse);
+			expect(req[REQ]).toBeInstanceOf(http.IncomingMessage);
+		});
+
+		it('calls [HANDLE_ROUTE] with req[RES]', () => {
+			const req = root[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[RES]).toBeInstanceOf(http.ServerResponse);
 		});
 
 		it('returns response to client', () => {
@@ -142,17 +158,27 @@ describe('Serving with @overlook/plugin-serve-http', () => { // eslint-disable-l
 			const args = childStatic[HANDLE_ROUTE].mock.calls[0];
 			expect(args).toBeArrayOfSize(1);
 			const req = args[0];
-			expect(req).toBeInstanceOf(http.IncomingMessage);
+			expect(req).toBeObject();
 		});
 
-		it('calls [HANDLE_ROUTE] with req.method', () => {
+		it('calls [HANDLE_ROUTE] with req[REQ_TYPE]', () => {
 			const req = childStatic[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.method).toBe('GET');
+			expect(req[REQ_TYPE]).toBe('HTTP');
 		});
 
-		it('calls [HANDLE_ROUTE] with req.url', () => {
+		it('calls [HANDLE_ROUTE] with req[METHOD]', () => {
 			const req = childStatic[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.url).toBe('/a');
+			expect(req[METHOD]).toBe('GET');
+		});
+
+		it('calls [HANDLE_ROUTE] with req[URL]', () => {
+			const req = childStatic[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[URL]).toBe('/a');
+		});
+
+		it('calls [HANDLE_ROUTE] with req[PATH]', () => {
+			const req = childStatic[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[PATH]).toBe('/a');
 		});
 
 		it('calls [HANDLE_ROUTE] with empty req[PARAMS]', () => {
@@ -160,9 +186,14 @@ describe('Serving with @overlook/plugin-serve-http', () => { // eslint-disable-l
 			expect(req[PARAMS]).toEqual({});
 		});
 
-		it('calls [HANDLE_ROUTE] with req.res', () => {
+		it('calls [HANDLE_ROUTE] with req[REQ]', () => {
 			const req = childStatic[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.res).toBeInstanceOf(http.ServerResponse);
+			expect(req[REQ]).toBeInstanceOf(http.IncomingMessage);
+		});
+
+		it('calls [HANDLE_ROUTE] with req[RES]', () => {
+			const req = childStatic[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[RES]).toBeInstanceOf(http.ServerResponse);
 		});
 
 		it('returns response to client', () => {
@@ -192,17 +223,27 @@ describe('Serving with @overlook/plugin-serve-http', () => { // eslint-disable-l
 			const args = childParam[HANDLE_ROUTE].mock.calls[0];
 			expect(args).toBeArrayOfSize(1);
 			const req = args[0];
-			expect(req).toBeInstanceOf(http.IncomingMessage);
+			expect(req).toBeObject();
 		});
 
-		it('calls [HANDLE_ROUTE] with req.method', () => {
+		it('calls [HANDLE_ROUTE] with req[REQ_TYPE]', () => {
 			const req = childParam[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.method).toBe('GET');
+			expect(req[REQ_TYPE]).toBe('HTTP');
 		});
 
-		it('calls [HANDLE_ROUTE] with req.url', () => {
+		it('calls [HANDLE_ROUTE] with req[METHOD]', () => {
 			const req = childParam[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.url).toBe('/123');
+			expect(req[METHOD]).toBe('GET');
+		});
+
+		it('calls [HANDLE_ROUTE] with req[URL]', () => {
+			const req = childParam[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[URL]).toBe('/123');
+		});
+
+		it('calls [HANDLE_ROUTE] with req[PATH]', () => {
+			const req = childParam[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[PATH]).toBe('/123');
 		});
 
 		it('calls [HANDLE_ROUTE] with req[PARAMS]', () => {
@@ -210,9 +251,14 @@ describe('Serving with @overlook/plugin-serve-http', () => { // eslint-disable-l
 			expect(req[PARAMS]).toEqual({prop: '123'});
 		});
 
-		it('calls [HANDLE_ROUTE] with req.res', () => {
+		it('calls [HANDLE_ROUTE] with req[REQ]', () => {
 			const req = childParam[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.res).toBeInstanceOf(http.ServerResponse);
+			expect(req[REQ]).toBeInstanceOf(http.IncomingMessage);
+		});
+
+		it('calls [HANDLE_ROUTE] with req[RES]', () => {
+			const req = childParam[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[RES]).toBeInstanceOf(http.ServerResponse);
 		});
 
 		it('returns response to client', () => {
@@ -242,17 +288,27 @@ describe('Serving with @overlook/plugin-serve-http', () => { // eslint-disable-l
 			const args = childWildcard[HANDLE_ROUTE].mock.calls[0];
 			expect(args).toBeArrayOfSize(1);
 			const req = args[0];
-			expect(req).toBeInstanceOf(http.IncomingMessage);
+			expect(req).toBeObject();
 		});
 
-		it('calls [HANDLE_ROUTE] with req.method', () => {
+		it('calls [HANDLE_ROUTE] with req[REQ_TYPE]', () => {
 			const req = childWildcard[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.method).toBe('GET');
+			expect(req[REQ_TYPE]).toBe('HTTP');
 		});
 
-		it('calls [HANDLE_ROUTE] with req.url', () => {
+		it('calls [HANDLE_ROUTE] with req[METHOD]', () => {
 			const req = childWildcard[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.url).toBe('/123/456');
+			expect(req[METHOD]).toBe('GET');
+		});
+
+		it('calls [HANDLE_ROUTE] with req[URL]', () => {
+			const req = childWildcard[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[URL]).toBe('/123/456');
+		});
+
+		it('calls [HANDLE_ROUTE] with req[PATH]', () => {
+			const req = childWildcard[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[PATH]).toBe('/123/456');
 		});
 
 		it('calls [HANDLE_ROUTE] with req[PARAMS]', () => {
@@ -260,9 +316,14 @@ describe('Serving with @overlook/plugin-serve-http', () => { // eslint-disable-l
 			expect(req[PARAMS]).toEqual({'*': '123/456'});
 		});
 
-		it('calls [HANDLE_ROUTE] with req.res', () => {
+		it('calls [HANDLE_ROUTE] with req[REQ]', () => {
 			const req = childWildcard[HANDLE_ROUTE].mock.calls[0][0];
-			expect(req.res).toBeInstanceOf(http.ServerResponse);
+			expect(req[REQ]).toBeInstanceOf(http.IncomingMessage);
+		});
+
+		it('calls [HANDLE_ROUTE] with req[RES]', () => {
+			const req = childWildcard[HANDLE_ROUTE].mock.calls[0][0];
+			expect(req[RES]).toBeInstanceOf(http.ServerResponse);
 		});
 
 		it('returns response to client', () => {

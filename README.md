@@ -26,7 +26,7 @@ Each route's path is its parent's path + the new path part. `/user` + `login` ->
 ```js
 const Route = require('@overlook/route');
 const pathPlugin = require('@overlook/plugin-path');
-const { PATH } = pathPlugin;
+const { PATH_PART } = pathPlugin;
 
 const PathRoute = Route.extend( pathPlugin );
 
@@ -74,7 +74,7 @@ If a route matches exactly, `[HANDLE_ROUTE]()` will be called with the request. 
 const Route = require('@overlook/route');
 const pathPlugin = require('@overlook/plugin-path');
 const { HANDLE_ROUTE } = require('@overlook/plugin-match');
-const { PATH } = pathPlugin;
+const { GET_PATH_PART } = pathPlugin;
 
 const PathRoute = Route.extend( pathPlugin );
 

@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.7.0
+
+Breaking changes:
+
+* Consume path from `req[PATH]`
+* Rename `PATH` symbol to `PATH_UNCONSUMED`
+
+Dependencies:
+
+* Update `is-it-type` dependency
+
+Dev:
+
+* Update dev dependencies
+
+Docs:
+
+* Correct code example typos
+
 ## 0.6.0
 
 Breaking changes:

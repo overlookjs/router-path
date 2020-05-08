@@ -1,6 +1,6 @@
 {
   "name": "@overlook/plugin-path",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Overlook framework path plugin",
   "main": "index.js",
   "files": [

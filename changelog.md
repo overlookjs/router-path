@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.8.0
+
+Breaking changes:
+
+* Update plugin dependencies
+
+Features:
+
+* ESM export
+
+Bug fixes:
+
+* Correctly order named wildcard routes
+* Order routes with '' path part last
+
+Dev:
+
+* Update dev dependencies
+
 ## 0.7.0
 
 Breaking changes:

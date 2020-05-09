@@ -7,7 +7,8 @@
 'use strict';
 
 // Modules
-const Route = require('@overlook/route'),
+const Plugin = require('@overlook/plugin'),
+	Route = require('@overlook/route'),
 	pluginMatch = require('@overlook/plugin-match'),
 	pluginOrder = require('@overlook/plugin-order'),
 	pluginOrdered = require('@overlook/plugin-ordered'),
@@ -19,8 +20,8 @@ require('../support/index.js');
 // Tests
 
 describe('Plugin', () => { // eslint-disable-line jest/lowercase-name
-	it('is an object', () => {
-		expect(pathPlugin).toBeObject();
+	it('is an instance of Plugin class', () => {
+		expect(pathPlugin).toBeInstanceOf(Plugin);
 	});
 
 	describe('when passed to `Route.extend()`', () => {
@@ -50,17 +51,6 @@ describe('Plugin', () => { // eslint-disable-line jest/lowercase-name
 			expect(PathRoute).toBeFunction();
 			const RouteOrdered = Route.extend(pluginMatch).extend(pluginOrder).extend(pluginOrdered);
 			expect(PathRoute.prototype).toBeInstanceOf(RouteOrdered);
-		});
-	});
-
-	describe('exports symbols', () => {
-		it.each([
-			['PATH_PART'],
-			['GET_PATH_PART'],
-			['PARAMS'],
-			['PATH_UNCONSUMED']
-		])('%s', (key) => {
-			expect(typeof pathPlugin[key]).toBe('symbol');
 		});
 	});
 });

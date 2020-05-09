@@ -19,7 +19,7 @@
   "dependencies": {
     "@overlook/plugin": "^0.2.3",
     "@overlook/plugin-match": "^0.7.1",
-    "@overlook/plugin-ordered": "^0.4.2",
+    "@overlook/plugin-ordered": "^0.5.0",
     "@overlook/plugin-request": "^0.1.0",
     "@overlook/route": "^0.5.1",
     "has-own-prop": "^2.0.0",

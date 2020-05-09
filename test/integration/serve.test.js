@@ -15,6 +15,7 @@ const http = require('http'),
 	{HANDLE_ROUTE} = require('@overlook/plugin-match'),
 	{REQ_TYPE, PATH} = require('@overlook/plugin-request'),
 	axios = require('axios'),
+	once = require('once'),
 	pathPlugin = require('@overlook/plugin-path'),
 	{PATH_PART, PARAMS} = pathPlugin;
 
@@ -56,11 +57,13 @@ const childWildcard = new PathRoute({
 });
 root.attachChild(childWildcard);
 
-// Init router
-root.init();
-root[PORT] = TEST_PORT;
-
 // Tests
+
+beforeEach(once(async () => {
+	// Init router
+	root[PORT] = TEST_PORT;
+	await root.init();
+}));
 
 beforeEach(async () => {
 	jest.clearAllMocks();

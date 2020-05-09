@@ -27,10 +27,10 @@ beforeEach(() => {
 
 describe('[MATCH]', () => {
 	describe('at base of path', () => {
-		it('when no match, returns null', () => {
+		it('when no match, returns undefined', () => {
 			route[PATH_PART] = 'abc';
 			const ret = route[MATCH]({[PATH]: '/def'});
-			expect(ret).toBeNull();
+			expect(ret).toBeUndefined();
 		});
 
 		describe('when root exact match, returns', () => {
@@ -319,11 +319,11 @@ describe('[MATCH]', () => {
 			};
 		}
 
-		it('when no match, returns null', () => {
+		it('when no match, returns undefined', () => {
 			const req = createReq('/abc/def');
 			route[PATH_PART] = 'abc';
 			const ret = route[MATCH](req);
-			expect(ret).toBeNull();
+			expect(ret).toBeUndefined();
 		});
 
 		describe('when named exact match', () => {

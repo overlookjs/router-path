@@ -8,7 +8,6 @@
 
 // Modules
 const Route = require('@overlook/route'),
-	{INIT_ROUTE} = Route,
 	pathPlugin = require('@overlook/plugin-path'),
 	{PATH_PART, GET_PATH_PART} = pathPlugin;
 
@@ -19,65 +18,59 @@ require('../support/index.js');
 
 const PathRoute = Route.extend(pathPlugin);
 
-describe('[INIT_ROUTE]', () => {
+describe('init', () => {
 	let route;
 	beforeEach(() => {
 		route = new PathRoute();
 	});
 
-	it("[PATH_PART] defaults to '' if is root route", () => {
-		route[INIT_ROUTE]();
+	it("[PATH_PART] defaults to '' if is root route", async () => {
+		await route.init();
 		expect(route[PATH_PART]).toBe('');
 	});
 
-	it("[PATH_PART] defaults to '' if no path route above", () => {
+	it("[PATH_PART] defaults to '' if no path route above", async () => {
 		const parent = new Route();
 		parent.attachChild(route);
-		route[INIT_ROUTE]();
+		await parent.init();
 		expect(route[PATH_PART]).toBe('');
 	});
 
-	it('[PATH_PART] defined by [GET_PATH_PART]()', () => {
+	it('[PATH_PART] defined by [GET_PATH_PART]()', async () => {
 		const parent = new Route();
 		parent.attachChild(route);
 		route[GET_PATH_PART] = () => 'abc';
-		route[INIT_ROUTE]();
+		await parent.init();
 		expect(route[PATH_PART]).toBe('abc');
 	});
 
-	it('inherits [PATH_PART] from .name', () => {
+	it('inherits [PATH_PART] from .name', async () => {
 		const parent = new PathRoute();
 		parent.attachChild(route);
 		route.name = 'abc';
-		route[INIT_ROUTE]();
+		await parent.init();
 		expect(route[PATH_PART]).toBe('abc');
 	});
 
-	it('throws error if [PATH_PART] is undefined and another path route above', () => {
+	it('throws error if [PATH_PART] is undefined and another path route above', async () => {
 		const parent = new PathRoute();
 		parent.attachChild(route);
-		expect(() => {
-			route.init();
-		}).toThrowWithMessage(
-			Error, '[plugin-path.PATH_PART] must be set on a path route (router path /?)'
+		await expect(parent.init()).rejects.toThrow(
+			new Error('[plugin-path.PATH_PART] must be set on a path route (router path /?)')
 		);
 	});
 
-	it('throws error if [PATH_PART] is null', () => {
+	it('throws error if [PATH_PART] is null', async () => {
 		route[PATH_PART] = null;
-		expect(() => {
-			route.init();
-		}).toThrowWithMessage(
-			Error, '[plugin-path.PATH_PART] must be set on a path route (router path /)'
+		await expect(route.init()).rejects.toThrow(
+			new Error('[plugin-path.PATH_PART] must be set on a path route (router path /)')
 		);
 	});
 
-	it('throws error if [PATH_PART] is not a string', () => {
+	it('throws error if [PATH_PART] is not a string', async () => {
 		route[PATH_PART] = 123;
-		expect(() => {
-			route.init();
-		}).toThrowWithMessage(
-			Error, '[plugin-path.PATH_PART] must be a string (router path /)'
+		await expect(route.init()).rejects.toThrow(
+			new Error('[plugin-path.PATH_PART] must be a string (router path /)')
 		);
 	});
 });

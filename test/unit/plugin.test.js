@@ -9,6 +9,7 @@
 // Modules
 const Route = require('@overlook/route'),
 	pluginMatch = require('@overlook/plugin-match'),
+	pluginOrder = require('@overlook/plugin-order'),
 	pluginOrdered = require('@overlook/plugin-ordered'),
 	pathPlugin = require('@overlook/plugin-path');
 
@@ -39,9 +40,15 @@ describe('Plugin', () => { // eslint-disable-line jest/lowercase-name
 			expect(PathRoute.prototype).toBeInstanceOf(RouteMatch);
 		});
 
+		it('returns subclass of RouteOrder', () => {
+			expect(PathRoute).toBeFunction();
+			const RouteOrder = Route.extend(pluginMatch).extend(pluginOrder);
+			expect(PathRoute.prototype).toBeInstanceOf(RouteOrder);
+		});
+
 		it('returns subclass of RouteOrdered', () => {
 			expect(PathRoute).toBeFunction();
-			const RouteOrdered = Route.extend(pluginMatch).extend(pluginOrdered);
+			const RouteOrdered = Route.extend(pluginMatch).extend(pluginOrder).extend(pluginOrdered);
 			expect(PathRoute.prototype).toBeInstanceOf(RouteOrdered);
 		});
 	});

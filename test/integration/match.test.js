@@ -10,6 +10,7 @@
 const Route = require('@overlook/route'),
 	{HANDLE_ROUTE} = require('@overlook/plugin-match'),
 	{PATH} = require('@overlook/plugin-request'),
+	once = require('once'),
 	pathPlugin = require('@overlook/plugin-path'),
 	{PATH_PART, PARAMS} = pathPlugin;
 
@@ -68,10 +69,12 @@ routeP.attachChild(routePP);
 const routePW = new PathRoute({[PATH_PART]: '*', [HANDLE_ROUTE]: spy(() => true)});
 routeP.attachChild(routePW);
 
-// Init router
-router.init();
-
 // Tests
+
+beforeEach(once(async () => {
+	// Init router
+	await router.init();
+}));
 
 beforeEach(() => {
 	jest.clearAllMocks();

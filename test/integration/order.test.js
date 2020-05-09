@@ -46,14 +46,14 @@ describe('Ordering', () => { // eslint-disable-line jest/lowercase-name
 			!!reorders
 		]);
 
-		it.each(cases)('%s route %s %s route', (_1, _2, _3, pathPart1, pathPart2, reorders) => {
-			const router = new Route(),
+		it.each(cases)('%s route %s %s route', async (_1, _2, _3, pathPart1, pathPart2, reorders) => {
+			const router = new PathRoute(),
 				route1 = new PathRoute({[PATH_PART]: pathPart1}),
 				route2 = new PathRoute({[PATH_PART]: pathPart2});
 			router.attachChild(route1);
 			router.attachChild(route2);
 
-			router.init();
+			await router.init();
 
 			expect(router.children).toBeArrayOfSize(2);
 			expect(router.children[0]).toBe(reorders ? route2 : route1);

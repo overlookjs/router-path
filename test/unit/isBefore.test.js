@@ -8,7 +8,6 @@
 
 // Modules
 const Route = require('@overlook/route'),
-	{IS_INITIALIZED} = Route,
 	{IS_BEFORE} = require('@overlook/plugin-ordered'),
 	pathPlugin = require('@overlook/plugin-path'),
 	{PATH_PART} = pathPlugin;
@@ -21,11 +20,11 @@ require('../support/index.js');
 const PathRoute = Route.extend(pathPlugin);
 
 describe('`[IS_BEFORE]()`', () => {
-	it('comparing path route to non-path route, returns null', () => {
+	it('comparing path route to non-path route, returns undefined', () => {
 		const route = new PathRoute(),
 			route2 = new Route();
 		const ret = route[IS_BEFORE](route2);
-		expect(ret).toBeNull();
+		expect(ret).toBeUndefined();
 	});
 
 	const PATH_PARTS = {
@@ -36,19 +35,19 @@ describe('`[IS_BEFORE]()`', () => {
 
 	describe.each([
 		['named', [
-			['named', null],
+			['named', undefined],
 			['param', true],
 			['wildcard', true]
 		]],
 		['param', [
 			['named', false],
-			['param', null],
+			['param', undefined],
 			['wildcard', true]
 		]],
 		['wildcard', [
 			['named', false],
 			['param', false],
-			['wildcard', null]
+			['wildcard', undefined]
 		]]
 	])('comparing %s route to', (type1, comparisons) => {
 		it.each(comparisons)('%s route returns %s', (type2, expected) => {
@@ -56,8 +55,6 @@ describe('`[IS_BEFORE]()`', () => {
 				pathPart2 = PATH_PARTS[type2];
 			const route1 = new PathRoute({[PATH_PART]: pathPart1}),
 				route2 = new PathRoute({[PATH_PART]: pathPart2});
-			route1[IS_INITIALIZED] = true;
-			route2[IS_INITIALIZED] = true;
 
 			const ret = route1[IS_BEFORE](route2);
 			expect(ret).toBe(expected);

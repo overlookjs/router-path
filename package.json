@@ -21,7 +21,7 @@
     "@overlook/plugin-match": "^0.7.1",
     "@overlook/plugin-ordered": "^0.4.2",
     "@overlook/plugin-request": "^0.1.0",
-    "@overlook/route": "^0.5.1",
+    "@overlook/route": "^0.6.0",
     "has-own-prop": "^2.0.0",
     "is-it-type": "^4.0.0"
   },

@@ -27,12 +27,12 @@
     "url": "https://github.com/overlookjs/plugin-path/issues"
   },
   "dependencies": {
-    "@overlook/plugin": "^0.2.6",
+    "@overlook/plugin": "^0.3.0",
     "@overlook/plugin-match": "^0.8.0",
     "@overlook/plugin-order": "^0.1.0",
     "@overlook/plugin-ordered": "^0.5.0",
     "@overlook/plugin-request": "^0.1.1",
-    "@overlook/route": "^0.6.2",
+    "@overlook/route": "^0.6.3",
     "has-own-prop": "^2.0.0",
     "is-it-type": "^4.0.0"
   },

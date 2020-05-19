@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.8.1
+
+Refactor:
+
+* Shorten code
+
+Dependencies:
+
+* Update `@overlook/route` + `@overlook/plugin` dependencies
+* Update plugin dependencies
+
+Tests:
+
+* Use `jest-expect-subclass` for subclass checking [refactor]
+
+Dev:
+
+* Update dev dependencies
+
 ## 0.8.0
 
 Breaking changes:

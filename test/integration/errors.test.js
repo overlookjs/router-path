@@ -10,7 +10,7 @@
 const Route = require('@overlook/route'),
 	{PATH} = require('@overlook/plugin-request'),
 	pathPlugin = require('@overlook/plugin-path'),
-	{HANDLE_ROUTE, PATH_PART, URL_PATH} = pathPlugin;
+	{PATH_PART, URL_PATH, HANDLE_ROUTE} = pathPlugin;
 
 // Init
 require('../support/index.js');

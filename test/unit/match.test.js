@@ -8,10 +8,9 @@
 
 // Modules
 const Route = require('@overlook/route'),
-	{MATCH} = require('@overlook/plugin-match'),
 	{PATH} = require('@overlook/plugin-request'),
 	pathPlugin = require('@overlook/plugin-path'),
-	{PATH_PART, PATH_UNCONSUMED} = pathPlugin;
+	{PATH_PART, PATH_UNCONSUMED, MATCH} = pathPlugin;
 
 // Init
 require('../support/index.js');

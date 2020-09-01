@@ -10,14 +10,12 @@
 const http = require('http'),
 	Route = require('@overlook/route'),
 	httpPlugin = require('@overlook/plugin-serve-http'),
-	{PORT, REQ, RES, URL, METHOD} = httpPlugin,
-	{START, STOP} = require('@overlook/plugin-start'),
-	{HANDLE_ROUTE} = require('@overlook/plugin-match'),
+	{PORT, REQ, RES, URL, METHOD, START, STOP} = httpPlugin,
 	{REQ_TYPE, PATH} = require('@overlook/plugin-request'),
 	axios = require('axios'),
 	once = require('once'),
 	pathPlugin = require('@overlook/plugin-path'),
-	{PATH_PART, PARAMS} = pathPlugin;
+	{PATH_PART, PARAMS, HANDLE_ROUTE} = pathPlugin;
 
 // Init
 require('../support/index.js');

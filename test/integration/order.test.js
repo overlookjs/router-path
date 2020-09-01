@@ -18,7 +18,7 @@ require('../support/index.js');
 
 const PathRoute = Route.extend(pathPlugin);
 
-describe('Ordering', () => { // eslint-disable-line jest/lowercase-name
+describe('Ordering', () => {
 	describe('routes are ordered with', () => {
 		function pathPartType(pathPart) {
 			if (pathPart === '*') return 'wildcard';

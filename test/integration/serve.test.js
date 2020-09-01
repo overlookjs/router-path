@@ -74,7 +74,7 @@ afterEach(async () => {
 	await root[STOP]();
 });
 
-describe('Serving with @overlook/plugin-serve-http', () => { // eslint-disable-line jest/lowercase-name
+describe('Serving with @overlook/plugin-serve-http', () => {
 	describe('root', () => {
 		let axiosRes;
 		beforeEach(async () => {

@@ -15,6 +15,7 @@ module.exports = function itExports(pathPlugin) {
 		it.each([
 			'PATH_PART',
 			'GET_PATH_PART',
+			'URL_PATH',
 			'PARAMS',
 			'PATH_UNCONSUMED'
 		])('%s', (key) => {

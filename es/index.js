@@ -12,6 +12,7 @@ export default pathPlugin;
 export const {
 	PATH_PART,
 	GET_PATH_PART,
+	URL_PATH,
 	PARAMS,
 	PATH_UNCONSUMED
 } = pathPlugin;

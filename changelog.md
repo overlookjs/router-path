@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.8.2
+
+Minor:
+
+* Drop support for Node v13
+
+Dependencies:
+
+* Update dependencies
+
+Dev:
+
+* Update dev dependencies
+
 ## 0.8.1
 
 Refactor:

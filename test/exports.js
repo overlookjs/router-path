@@ -17,7 +17,8 @@ module.exports = function itExports(pathPlugin) {
 			'GET_PATH_PART',
 			'URL_PATH',
 			'PARAMS',
-			'PATH_UNCONSUMED'
+			'PATH_UNCONSUMED',
+			'PATH'
 		])('%s', (key) => {
 			expect(typeof pathPlugin[key]).toBe('symbol');
 		});

@@ -14,5 +14,6 @@ export const {
 	GET_PATH_PART,
 	URL_PATH,
 	PARAMS,
-	PATH_UNCONSUMED
+	PATH_UNCONSUMED,
+	PATH
 } = pathPlugin;

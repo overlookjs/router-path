@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.8.3
+
+Features:
+
+* Record `URL_PATH` on routes
+* Re-export `PATH` symbol from `@overlook/plugin-request`
+
+Refactor:
+
+* Use `@overlook/util-find-parent` for locating parent path route
+
+Tests:
+
+* Use inherited symbols [refactor]
+
+Docs:
+
+* Inherited symbols
+
 ## 0.8.2
 
 Minor:

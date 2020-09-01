@@ -68,13 +68,12 @@ To handle requests, define/extend the `[HANDLE_ROUTE]()` method.
 
 If a route matches exactly, `[HANDLE_ROUTE]()` will be called with the request. If it only matches in part, the request will be forwarded on to the route's children to match.
 
-`[HANDLE_ROUTE]` symbol is exported by [@overlook/plugin-match](https://www.npmjs.com/package/@overlook/plugin-match) (which this plugin extends).
+`[HANDLE_ROUTE]` symbol is re-exported from [@overlook/plugin-match](https://www.npmjs.com/package/@overlook/plugin-match) (which this plugin extends).
 
 ```js
 const Route = require('@overlook/route');
 const pathPlugin = require('@overlook/plugin-path');
-const { HANDLE_ROUTE } = require('@overlook/plugin-match');
-const { GET_PATH_PART } = pathPlugin;
+const { GET_PATH_PART, HANDLE_ROUTE } = pathPlugin;
 
 const PathRoute = Route.extend( pathPlugin );
 
